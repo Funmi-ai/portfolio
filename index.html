@@ -1,0 +1,696 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Fattima Goffe: portfolio for a Business Development Representative role at Temporal.">
+<title>Fattima Goffe Portfolio</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,500&family=Public+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap">
+<style>
+/* Layout: a horizontal deck of seven full-width panels (cover + six sections). Native
+   scroll-snap gives swipe paging; JS adds side arrows, a section bar, keys, deep links
+   (#qualification etc.) and keeps keyboard focus inside the visible panel.
+   Look: deliberately single-theme dark editorial: slate ground, serif headlines,
+   mono labels, one copper accent. Semantic colours only mark real states. */
+:root{
+  --bg:#0f1114; --surface:#171a1f; --surface-2:#1f232a; --line:#2c323b;
+  --ink:#f0f2f4; --muted:#a3abb5; --faint:#717a85;
+  --accent:#e2925f; --accent-soft:rgba(226,146,95,.14); --accent-ink:#1b120c;
+  --steel:#93b4dc; --steel-soft:rgba(147,180,220,.14);
+  --ok:#72cc9c; --ok-soft:rgba(114,204,156,.13);
+  --warn:#e8c46a; --warn-soft:rgba(232,196,106,.13);
+  --stop:#ec7c7c; --stop-soft:rgba(236,124,124,.13);
+  --display:"Fraunces", Georgia, "Times New Roman", serif;
+  --body:"Public Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --mono:"JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+  color-scheme: dark;
+}
+html,body{height:100%; margin:0;}
+*{box-sizing:border-box}
+body{background:var(--bg); color:var(--ink); font-family:var(--body); font-size:15px; overscroll-behavior-y:none;
+  display:flex; flex-direction:column;}
+h1,h2,h3{margin:0; text-wrap:balance; font-weight:600;}
+p{margin:0; line-height:1.6;}
+a{color:var(--accent);}
+button{font-family:inherit; cursor:pointer; color:inherit;}
+:focus-visible{outline:2px solid var(--accent); outline-offset:3px; border-radius:6px;}
+.mono{font-family:var(--mono);}
+.label{font-family:var(--mono); font-size:11px; letter-spacing:.12em; text-transform:uppercase; color:var(--accent);}
+.muted{color:var(--muted);}
+
+/* ---------- deck ---------- */
+.deck{flex:1 1 auto; min-height:0; display:flex; overflow-x:auto; overflow-y:hidden; scroll-snap-type:x mandatory;
+  overscroll-behavior-x:contain; scrollbar-width:none;}
+.deck::-webkit-scrollbar{display:none;}
+@media (prefers-reduced-motion:no-preference){ .deck{scroll-behavior:smooth;} }
+.panel{flex:0 0 100%; height:100%; overflow-y:auto; scroll-snap-align:start; scroll-snap-stop:always;
+  padding-block:56px 40px;
+  padding-left:max(80px, calc(env(safe-area-inset-left,0px) + 72px));
+  padding-right:max(80px, calc(env(safe-area-inset-right,0px) + 72px));
+  display:flex;}
+.inner{width:100%; max-width:1120px; margin:auto; display:flex; flex-direction:column; gap:22px;}
+@media (max-width:640px){
+  .panel{padding-block:28px 28px;
+    padding-left:max(20px, calc(env(safe-area-inset-left,0px) + 16px));
+    padding-right:max(20px, calc(env(safe-area-inset-right,0px) + 16px));}
+}
+.head{display:flex; flex-direction:column; gap:12px; max-width:760px;}
+.head h2{font-family:var(--display); font-size:clamp(28px,4.2vw,50px); line-height:1.08; letter-spacing:-.01em;}
+.head h2.long{font-size:clamp(26px,3.3vw,40px);}
+.lede{color:var(--muted); font-size:16.5px; max-width:62ch;}
+.by{font-family:var(--mono); font-size:12px; color:var(--muted); max-width:70ch; line-height:1.6;}
+.by b{color:var(--ink); font-weight:500;}
+.split{display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1fr); gap:28px; align-items:start;}
+.split.wide-right{grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr);}
+@media (max-width:900px){ .split, .split.wide-right{grid-template-columns:minmax(0,1fr);} }
+.card{background:var(--surface); border:1px solid var(--line); border-radius:14px; padding:20px;}
+
+.lesson{display:flex; flex-direction:column; gap:8px; max-width:640px;}
+.lesson .q{font-family:var(--display); font-style:italic; font-weight:500; font-size:clamp(19px,2.1vw,24px); line-height:1.35;}
+.repo{display:inline-flex; align-items:center; gap:8px; font-family:var(--mono); font-size:12.5px; color:var(--ink);
+  text-decoration:none; border:1px solid var(--line); border-radius:999px; padding:8px 14px; align-self:flex-start;}
+.repo:hover{border-color:var(--accent); color:var(--accent);}
+.repo span{color:var(--accent);}
+
+details{border-top:1px solid var(--line); padding-top:4px;}
+summary{cursor:pointer; list-style:none; font-family:var(--mono); font-size:12.5px; color:var(--accent); padding:10px 0;}
+summary::-webkit-details-marker{display:none;}
+summary::before{content:"+ ";} details[open] summary::before{content:"− ";}
+details .body{padding-bottom:10px; color:var(--muted); font-size:14px; display:flex; flex-direction:column; gap:8px;}
+details ul{margin:0; padding-left:18px; display:flex; flex-direction:column; gap:6px;}
+
+/* ---------- cover ---------- */
+.cover h1{font-family:var(--display); font-size:clamp(40px,7.5vw,84px); line-height:1; letter-spacing:-.02em; font-weight:600;}
+.cover .role{font-family:var(--mono); font-size:13px; color:var(--accent); letter-spacing:.04em;}
+.cover .intro{font-size:clamp(17px,1.8vw,20px); line-height:1.55; max-width:56ch;}
+.cover .bg{color:var(--muted); max-width:60ch;}
+.proofs{display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:12px;}
+@media (max-width:900px){ .proofs{grid-template-columns:minmax(0,1fr);} }
+@media (max-width:520px){ .proofs{grid-template-columns:minmax(0,1fr);} }
+.proof{text-align:left; background:var(--surface); border:1px solid var(--line); border-radius:14px; padding:16px;
+  display:flex; flex-direction:column; gap:8px; min-height:132px;}
+.proof:hover{border-color:var(--accent);}
+.proof .n{font-family:var(--mono); font-size:11px; color:var(--faint);}
+.proof .t{font-weight:600; font-size:15px; line-height:1.35;}
+.proof .f{font-family:var(--mono); font-size:11.5px; color:var(--muted); margin-top:auto;}
+.hint{font-family:var(--mono); font-size:12px; color:var(--faint);}
+
+/* ---------- stakeholder timeline ---------- */
+.tl{display:flex; align-items:flex-start; gap:0; list-style:none; margin:0; padding:0;}
+.tl li{flex:1 1 0; display:flex; flex-direction:column; align-items:center; position:relative; min-width:0;}
+.tl li::before{content:""; position:absolute; top:19px; left:-50%; width:100%; height:2px; background:var(--line); z-index:0;}
+.tl li:first-child::before{display:none;}
+.tl li.gap::before{background:repeating-linear-gradient(90deg, var(--warn) 0 5px, transparent 5px 10px);}
+.ms{position:relative; z-index:1; display:flex; flex-direction:column; align-items:center; gap:8px; background:none; border:none; padding:0 4px; max-width:150px;}
+.ms .dot{width:40px; height:40px; border-radius:50%; background:var(--surface-2); border:1px solid var(--line);
+  display:flex; align-items:center; justify-content:center; font-family:var(--mono); font-size:12px; gap:2px;}
+.ms .dots i{display:inline-block; width:4px; height:4px; border-radius:50%; background:var(--steel); margin:0 1px;}
+.ms .lbl{font-size:12.5px; color:var(--muted); text-align:center; line-height:1.3;}
+.ms[aria-pressed="true"] .dot{border-color:var(--accent); background:var(--accent-soft);}
+.ms[aria-pressed="true"] .lbl{color:var(--ink);}
+.ms.stall .dot{color:var(--stop); background:var(--stop-soft); border-color:transparent;}
+.tl-detail{min-height:86px;}
+.tl-detail .step{font-family:var(--mono); font-size:11px; color:var(--faint);}
+.tl-detail p{font-size:16px; margin-top:6px;}
+.facts{display:flex; flex-wrap:wrap; gap:8px;}
+.facts span{font-family:var(--mono); font-size:12px; color:var(--muted); border:1px solid var(--line); border-radius:999px; padding:5px 11px;}
+@media (max-width:560px){
+  .tl{flex-direction:column; gap:0;}
+  .tl li{flex-direction:row; align-items:stretch; width:100%;}
+  .tl li::before{top:-50%; left:19px; width:2px; height:100%;}
+  .tl li.gap::before{background:repeating-linear-gradient(180deg, var(--warn) 0 5px, transparent 5px 10px);}
+  .ms{flex-direction:row; max-width:none; gap:12px; padding:6px 0;}
+  .ms .lbl{text-align:left;}
+}
+
+/* ---------- qualification stages ---------- */
+.disclose{font-family:var(--mono); font-size:12px; color:var(--warn); line-height:1.55;}
+.stages{display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:8px; list-style:none; margin:0; padding:0;}
+@media (max-width:560px){ .stages{grid-template-columns:repeat(2,minmax(0,1fr));} }
+.stage{width:100%; text-align:left; background:var(--surface-2); border:1px solid var(--line); border-radius:10px; padding:10px 12px;
+  display:flex; flex-direction:column; gap:4px; min-height:62px;}
+.stage .i{font-family:var(--mono); font-size:10.5px; color:var(--faint); display:flex; justify-content:space-between; gap:6px;}
+.stage .s{font-size:13.5px; font-weight:600;}
+.stage[aria-pressed="true"]{border-color:var(--accent);}
+.stage.ok{border-color:rgba(114,204,156,.5);} .stage.ok .mark{color:var(--ok);}
+.stage.warn{border-color:rgba(232,196,106,.6);} .stage.warn .mark{color:var(--warn);}
+.stage.dup{border-color:rgba(236,124,124,.6);} .stage.dup .mark{color:var(--stop);}
+.stage-detail{font-size:14px; color:var(--muted); min-height:44px;}
+.stage-detail b{color:var(--ink); font-weight:600;}
+.picker{display:flex; flex-wrap:wrap; gap:8px;}
+.pick{font-family:var(--mono); font-size:12.5px; background:var(--surface-2); border:1px solid var(--line); border-radius:999px; padding:9px 14px;}
+.pick[aria-pressed="true"]{border-color:var(--accent); color:var(--accent);}
+.result{display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:10px;}
+@media (max-width:520px){ .result{grid-template-columns:minmax(0,1fr);} }
+.rf{background:var(--surface-2); border-radius:10px; padding:12px 14px;}
+.rf.full{grid-column:1/-1;}
+.rf .v.why{font-weight:500; color:var(--muted); font-size:14px;}
+.rf .k{font-family:var(--mono); font-size:10.5px; color:var(--faint); text-transform:uppercase; letter-spacing:.06em;}
+.rf .v{font-size:15px; font-weight:600; margin-top:4px; line-height:1.35;}
+.v.ok{color:var(--ok);} .v.warn{color:var(--warn);} .v.dup{color:var(--stop);}
+.trace{display:flex; flex-direction:column; gap:6px;}
+.trace div{display:flex; gap:10px; font-size:13px;}
+.trace .p{font-family:var(--mono); font-size:10.5px; padding:2px 7px; border-radius:5px; flex-shrink:0; height:fit-content;}
+.p.ok{background:var(--ok-soft); color:var(--ok);} .p.warn{background:var(--warn-soft); color:var(--warn);} .p.dup{background:var(--stop-soft); color:var(--stop);}
+.sim{font-family:var(--mono); font-size:11px; color:var(--faint);}
+
+@media (max-width:900px){ .qual-demo{order:-1;} }
+
+/* ---------- agent map ---------- */
+.amap{display:flex; flex-direction:column; align-items:stretch; gap:6px;}
+.arow{display:grid; grid-template-columns:minmax(0,1fr); gap:8px;}
+.arow.two{grid-template-columns:minmax(0,1fr) minmax(0,1fr);}
+.down{text-align:center; color:var(--faint); font-size:12px; line-height:1;}
+.agent{width:100%; display:flex; align-items:center; justify-content:space-between; gap:8px; text-align:left;
+  background:var(--surface-2); border:1px solid var(--line); border-radius:10px; padding:9px 12px; min-width:0;}
+.agent .nm{font-size:13.5px; font-weight:600; min-width:0;}
+.agent .sub{display:block; font-weight:400; font-size:11.5px; color:var(--muted); margin-top:2px;}
+.agent[aria-pressed="true"]{border-color:var(--accent);}
+.model{font-family:var(--mono); font-size:10.5px; padding:3px 7px; border-radius:5px; flex-shrink:0;}
+.model.opus{background:var(--accent-soft); color:var(--accent);} .model.sonnet{background:var(--steel-soft); color:var(--steel);}
+.human{border:1px dashed var(--faint); border-radius:10px; padding:8px 12px; font-size:12.5px; color:var(--muted); text-align:center;}
+.branch-l{font-family:var(--mono); font-size:10.5px; color:var(--faint); margin-bottom:-2px;}
+.side{display:flex; align-items:center; gap:8px; font-size:12px; color:var(--muted);}
+.side .agent{width:auto; flex:1;}
+.agent-detail{display:flex; flex-direction:column; gap:10px;}
+.agent-detail h3{font-family:var(--display); font-size:24px;}
+.agent-detail .meta{display:flex; flex-wrap:wrap; gap:8px; align-items:center;}
+.agent-detail .meta span.f{font-family:var(--mono); font-size:11.5px; color:var(--faint);}
+.agent-detail p{color:var(--muted); font-size:14.5px;}
+
+.aflow{display:none; flex-wrap:wrap; gap:6px; align-items:center; list-style:none; margin:0; padding:0;}
+.aflow li{display:flex; align-items:center; gap:6px;}
+.aflow li:not(:last-child)::after{content:"→"; color:var(--faint); font-size:12px;}
+.ab{font-family:var(--mono); font-size:12px; background:var(--surface-2); border:1px solid var(--line); border-radius:999px;
+  padding:8px 11px; display:inline-flex; align-items:center; gap:6px;}
+.ab::before{content:""; width:6px; height:6px; border-radius:50%; background:var(--steel);}
+.ab.opus::before{background:var(--accent);}
+.ab[aria-pressed="true"]{border-color:var(--accent); color:var(--accent);}
+.ah{font-family:var(--mono); font-size:11.5px; color:var(--muted); border:1px dashed var(--faint); border-radius:999px; padding:6px 10px;}
+.aflow .or{font-family:var(--mono); font-size:11px; color:var(--faint);}
+.aflow-key{display:none; font-family:var(--mono); font-size:11px; color:var(--faint);}
+@media (max-width:900px){ .aflow{display:flex;} .aflow-key{display:block;} .amap{display:none;} }
+
+/* ---------- temporal comparison ---------- */
+.lanes{display:flex; flex-direction:column; gap:14px;}
+.lane{display:flex; flex-direction:column; gap:10px;}
+.lane .ttl{font-family:var(--mono); font-size:11.5px; color:var(--muted); letter-spacing:.04em;}
+.steps{display:flex; flex-wrap:wrap; gap:6px; align-items:center;}
+.st{font-family:var(--mono); font-size:12px; padding:7px 11px; border-radius:8px; background:var(--surface-2); border:1px solid var(--line); color:var(--faint);}
+.st.done{color:var(--ok); border-color:rgba(114,204,156,.45);}
+.st.fail{color:var(--stop); border-color:rgba(236,124,124,.55); background:var(--stop-soft);}
+.st.retry{color:var(--warn); border-color:rgba(232,196,106,.55);}
+.st.halt{color:var(--faint); border-style:dashed;}
+.outcome{font-size:14px; color:var(--muted); min-height:42px;}
+.play{font-family:var(--mono); font-size:12.5px; background:var(--accent); color:var(--accent-ink); border:none; border-radius:999px; padding:9px 16px; align-self:flex-start; font-weight:600;}
+.who{display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1fr); gap:12px;}
+@media (max-width:560px){ .who{grid-template-columns:minmax(0,1fr);} }
+.who p{font-size:14px; color:var(--muted);}
+.who .k{font-family:var(--mono); font-size:10.5px; color:var(--faint); text-transform:uppercase; letter-spacing:.06em; margin-bottom:6px;}
+
+/* ---------- conversations ---------- */
+.disc{display:grid; grid-template-columns:120px minmax(0,1fr); gap:10px 14px; font-size:14px;}
+.disc .k{font-family:var(--mono); font-size:10.5px; color:var(--faint); text-transform:uppercase; letter-spacing:.06em; padding-top:3px;}
+.disc .quote{font-family:var(--display); font-style:italic; font-size:17px;}
+@media (max-width:520px){ .disc{grid-template-columns:minmax(0,1fr); gap:2px;} .disc .k{padding-top:10px;} }
+.qs{display:flex; flex-direction:column; gap:12px;}
+.qcard{background:var(--surface); border:1px solid var(--line); border-radius:14px; padding:18px;}
+.qcard .q{font-family:var(--display); font-style:italic; font-size:clamp(18px,2vw,22px); line-height:1.35;}
+.qcard .r{font-size:14px; color:var(--muted); margin-top:10px;}
+.qcard .r b{color:var(--ink); font-weight:600;}
+.repos{display:flex; flex-wrap:wrap; gap:10px;}
+.foot{font-family:var(--mono); font-size:11.5px; color:var(--faint);}
+
+/* ---------- navigation ---------- */
+.side-arrow{position:fixed; top:50%; transform:translateY(-50%); z-index:20; width:50px; height:50px; border-radius:50%;
+  background:var(--surface); border:1px solid var(--line); font-size:20px; display:flex; align-items:center; justify-content:center;}
+.side-arrow.left{left:max(14px, env(safe-area-inset-left,0px));}
+.side-arrow.right{right:max(14px, env(safe-area-inset-right,0px));}
+.side-arrow:hover:not(:disabled){border-color:var(--accent); color:var(--accent);}
+.side-arrow:disabled{opacity:.18; cursor:default;}
+/* Navigation is a docked footer row, not an overlay: the deck ends where it begins. */
+.navwrap{flex:none; display:flex; justify-content:center; background:var(--bg);
+  padding:8px max(12px, env(safe-area-inset-right,0px)) max(10px, env(safe-area-inset-bottom,0px)) max(12px, env(safe-area-inset-left,0px));}
+.bar{display:flex; align-items:center; gap:10px; background:rgba(23,26,31,.94); border:1px solid var(--line); border-radius:999px;
+  padding:5px 6px 5px 14px; max-width:100%;}
+.bar-arrow{display:none; width:44px; height:44px; flex-shrink:0; border-radius:50%; background:var(--surface-2);
+  border:1px solid var(--line); font-size:17px; align-items:center; justify-content:center;}
+.bar-arrow:disabled{opacity:.25; cursor:default;}
+@media (max-width:640px){
+  .side-arrow{display:none;}
+  .bar-arrow{display:flex;}
+  .bar{width:100%; justify-content:space-between; padding:5px;}
+}
+.count{font-family:var(--mono); font-size:11px; color:var(--faint); white-space:nowrap;}
+.tabs{display:flex; gap:2px;}
+.tab{font-family:var(--mono); font-size:11px; color:var(--muted); background:transparent; border:none; padding:7px 10px; border-radius:999px; white-space:nowrap;}
+.tab[aria-current="true"]{background:var(--accent); color:var(--accent-ink); font-weight:600;}
+@media (max-width:860px){
+  .tab{font-size:0; width:22px; height:22px; padding:0; position:relative;}
+  .tab::before{content:""; position:absolute; inset:7px; border-radius:50%; background:var(--line);}
+  .tab[aria-current="true"]{background:transparent;}
+  .tab[aria-current="true"]::before{background:var(--accent);}
+}
+@media (prefers-reduced-motion:no-preference){
+  .stage,.agent,.ms .dot,.st,.tab,.proof{transition:border-color .2s, background-color .2s, color .2s;}
+}
+</style>
+</head>
+<body>
+<div class="deck" id="deck">
+
+  <!-- ===================== COVER ===================== -->
+  <section class="panel" id="p-intro" aria-label="Introduction">
+    <div class="inner cover">
+      <span class="label">Business Development Representative · Temporal</span>
+      <h1 tabindex="-1">Fattima Goffe</h1>
+      <div class="role">AI automation consultant → technology sales</div>
+      <p class="intro">I've taken a proposed AI automation engagement through seven stakeholder conversations to contract stage (unsigned) and designed technical solutions to business problems. Now I'm bringing both into technology sales.</p>
+      <p class="bg">Before that: digital marketing, and counselling and group facilitation (2015–2020).</p>
+      <div class="proofs">
+        <button class="proof" data-go="commercial"><span class="n">01 · Commercial</span><span class="t">Seven stakeholder conversations to contract stage</span><span class="f">Proposed $15,000 · S&amp;P 500</span></button>
+        <button class="proof" data-go="qualification"><span class="n">02 · Qualification</span><span class="t">A lead-qualification prototype you can run</span><span class="f">8 stages · 3 example leads</span></button>
+        <button class="proof" data-go="agents"><span class="n">03 · Agents</span><span class="t">Seven specialist agents, one process</span><span class="f">2 on Opus · 5 on Sonnet</span></button>
+      </div>
+      <div class="hint">Swipe, use ← →, or jump to any section · about two minutes end to end</div>
+    </div>
+  </section>
+
+
+  <!-- ===================== 02 COMMERCIAL ===================== -->
+  <section class="panel" id="p-commercial" aria-label="01 Commercial experience">
+    <div class="inner">
+      <div class="head">
+        <span class="label">01 · Commercial experience</span>
+        <h2 tabindex="-1">Seven conversations. One lesson in qualification.</h2>
+      </div>
+      <div class="facts"><span>Proposed $15,000</span><span>AI automation engagement</span><span>S&amp;P 500 company</span><span>CMO as champion</span><span>Contract stage</span><span>Never signed</span></div>
+      <ol class="tl" id="timeline" aria-label="Stakeholder timeline"></ol>
+      <div class="card tl-detail" id="tlDetail" aria-live="polite"></div>
+      <div class="lesson"><span class="label">Key lesson</span><p class="q">“An interested champion isn't the same as an organisation ready to buy.”</p></div>
+    </div>
+  </section>
+
+  <!-- ===================== 03 QUALIFICATION ===================== -->
+  <section class="panel" id="p-qualification" aria-label="02 Lead qualification and CRM">
+    <div class="inner">
+      <div class="head">
+        <span class="label">02 · Lead qualification &amp; CRM</span>
+        <h2 tabindex="-1">Different leads need different decisions.</h2>
+        <p class="disclose">Independent prototype inspired by Niyo's public offering · synthetic data · hypothetical qualification criteria · not a live Niyo deployment or endorsed integration</p>
+        <p class="by">I defined the <b>problem</b>, <b>workflow requirements</b> and <b>decision logic</b>; Claude Code implemented the prototype.</p>
+      </div>
+      <div class="split wide-right">
+        <div class="qual-flow" style="display:flex; flex-direction:column; gap:12px;">
+          <ol class="stages" id="stages" aria-label="Eight-stage workflow"></ol>
+          <p class="stage-detail" id="stageDetail" aria-live="polite"></p>
+        </div>
+        <div class="card qual-demo" style="display:flex; flex-direction:column; gap:14px;">
+          <span class="sim">Simulation · runs the prototype's decision logic in your browser · no live system</span>
+          <div class="picker" id="picker" aria-label="Example leads"></div>
+          <div class="result" id="result" aria-live="polite"></div>
+          <details id="traceBox" hidden>
+            <summary>See the execution trace</summary>
+            <div class="body trace" id="trace"></div>
+          </details>
+          <p class="muted" id="demoHint" style="font-size:14px;">Pick an example lead to see the decision.</p>
+        </div>
+      </div>
+      <div class="lesson"><span class="label">Key lesson</span><p class="q">“Separating qualification logic from CRM integration makes it easier to introduce a live connection later without rebuilding the entire workflow.”</p></div>
+      <a class="repo" href="https://github.com/Funmi-ai/niyo-lead-crm-poc" target="_blank" rel="noopener"><span>↗</span> niyo-lead-crm-poc</a>
+    </div>
+  </section>
+
+  <!-- ===================== 04 AGENTS ===================== -->
+  <section class="panel" id="p-agents" aria-label="03 Multi-agent workflow">
+    <div class="inner">
+      <div class="split wide-right">
+        <div style="display:flex; flex-direction:column; gap:20px;">
+          <div class="head">
+            <span class="label">03 · Multi-agent workflow</span>
+            <h2 class="long" tabindex="-1">Seven specialist agents. One coordinated process.</h2>
+            <p class="by">I designed the <b>roles</b>, <b>responsibilities</b> and <b>model allocation</b>; Claude Code built the agents. One shared post file carries the work from stage to stage.</p>
+          </div>
+          <ol class="aflow" aria-label="Workflow overview: select an agent">
+            <li><button class="ab" data-agent="format">Format Analyst</button></li>
+            <li><button class="ab" data-agent="researcher">Researcher</button></li>
+            <li><button class="ab opus" data-agent="hooks">Hook Generator</button></li>
+            <li><button class="ab" data-agent="audience">Audience Filter</button></li>
+            <li><span class="ah">I pick</span></li>
+            <li><button class="ab opus" data-agent="copy">Copywriter</button><span class="or">or</span><button class="ab" data-agent="carousel">Carousel Builder</button></li>
+            <li><button class="ab" data-agent="audience">Audience Filter</button></li>
+            <li><button class="ab" data-agent="designer">Designer</button></li>
+            <li><span class="ah">I post</span></li>
+            <li><button class="ab" data-agent="researcher">Weekly review</button></li>
+          </ol>
+          <p class="aflow-key">Copper dot = Opus · blue dot = Sonnet · tap any agent for its role</p>
+          <div class="card agent-detail" id="agentDetail" aria-live="polite"></div>
+          <div class="lesson"><span class="label">Key lesson</span><p class="q">“Repeatable operations belong in deterministic code. AI models are most useful where the task requires judgement.”</p></div>
+          <a class="repo" href="https://github.com/Funmi-ai/threelittlereaders-agent-pipeline" target="_blank" rel="noopener"><span>↗</span> threelittlereaders-agent-pipeline</a>
+        </div>
+        <div class="amap" id="amap" aria-label="Agent map: select an agent">
+          <div class="side"><button class="agent" data-agent="format"><span class="nm">Format Analyst<span class="sub">finds new formats in niche outliers</span></span><span class="model sonnet">Sonnet</span></button><span>feeds →<br>research</span></div>
+          <div class="arow"><button class="agent" data-agent="researcher"><span class="nm">Researcher<span class="sub">research note for each post</span></span><span class="model sonnet">Sonnet</span></button></div>
+          <div class="down" aria-hidden="true">↓</div>
+          <div class="arow"><button class="agent" data-agent="hooks"><span class="nm">Hook Generator<span class="sub">three cover + opening-line options</span></span><span class="model opus">Opus</span></button></div>
+          <div class="down" aria-hidden="true">↓</div>
+          <div class="arow"><button class="agent" data-agent="audience"><span class="nm">Audience Filter<span class="sub">reads the hooks as the audience would</span></span><span class="model sonnet">Sonnet</span></button></div>
+          <div class="down" aria-hidden="true">↓</div>
+          <div class="human">I pick the hook</div>
+          <div class="down" aria-hidden="true">↓</div>
+          <div class="arow two"><span class="branch-l">Reel</span><span class="branch-l">Carousel</span></div>
+          <div class="arow two">
+            <button class="agent" data-agent="copy"><span class="nm">Copywriter<span class="sub">story + caption</span></span><span class="model opus">Opus</span></button>
+            <button class="agent" data-agent="carousel"><span class="nm">Carousel Builder<span class="sub">slides, then Canva</span></span><span class="model sonnet">Sonnet</span></button>
+          </div>
+          <div class="down" aria-hidden="true">↓</div>
+          <div class="arow"><button class="agent" data-agent="audience"><span class="nm">Audience Filter<span class="sub">checks the caption and overlay</span></span><span class="model sonnet">Sonnet</span></button></div>
+          <div class="down" aria-hidden="true">↓</div>
+          <div class="arow"><button class="agent" data-agent="designer"><span class="nm">Designer<span class="sub">reel cover · carousel design check</span></span><span class="model sonnet">Sonnet</span></button></div>
+          <div class="down" aria-hidden="true">↓</div>
+          <div class="human">I post</div>
+          <div class="down" aria-hidden="true">↓</div>
+          <div class="arow"><button class="agent" data-agent="researcher"><span class="nm">Researcher<span class="sub">weekly review, learnings back into the playbooks ↺</span></span><span class="model sonnet">Sonnet</span></button></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== 05 TEMPORAL ===================== -->
+  <section class="panel" id="p-temporal" aria-label="04 Why Temporal">
+    <div class="inner">
+      <div class="head">
+        <span class="label">04 · Why Temporal</span>
+        <h2 tabindex="-1">Building workflows taught me why reliability matters.</h2>
+        <p class="lede">I started building AI automations in n8n in 2025, then moved to code-based workflows with Claude Code in late 2025. Inspecting past executions in n8n showed me where multi-step processes break, and how much of the recovery still falls to a person.</p>
+      </div>
+      <div class="card lanes">
+        <span class="sim">Illustrative simulation · not a Temporal implementation</span>
+        <div class="lane">
+          <span class="ttl">A typical automation workflow</span>
+          <div class="steps" id="laneA"></div>
+          <p class="outcome" id="outA"></p>
+        </div>
+        <div class="lane">
+          <span class="ttl">The same steps as a Temporal workflow</span>
+          <div class="steps" id="laneB"></div>
+          <p class="outcome" id="outB"></p>
+        </div>
+        <button class="play" id="playBtn">▶ Simulate a failure</button>
+      </div>
+      <div class="who">
+        <div class="card"><div class="k">How Temporal works</div><p>Temporal records workflow events in an event history. After a failure it uses <b style="color:var(--ink)">deterministic replay</b>, re-running the workflow code against that history, to reconstruct the workflow's state; steps already recorded as complete are read from the history rather than re-executed. Calls to external systems run as activities with configurable <b style="color:var(--ink)">retry policies</b>. An activity can occasionally run more than once, so it needs to be safe to repeat.</p></div>
+        <div class="card"><div class="k">Why a buyer cares</div><p>Less custom recovery logic to write and maintain, less manual intervention when something fails, and more dependable business processes.</p></div>
+      </div>
+      <p class="foot">n8n's execution logs show what happened in a run; Temporal's event history lets a workflow continue after a failure. None of my projects implement Temporal's durable execution.</p>
+    </div>
+  </section>
+
+  <!-- ===================== 06 CONVERSATIONS ===================== -->
+  <section class="panel" id="p-conversations" aria-label="05 Commercial conversations">
+    <div class="inner">
+      <div class="head">
+        <span class="label">05 · Commercial conversations</span>
+        <h2 tabindex="-1">Understand the problem before presenting the solution.</h2>
+      </div>
+      <div class="split">
+        <div class="card">
+          <span class="label" style="display:block; margin-bottom:14px;">Hypothetical discovery · the prototype's problem</span>
+          <div class="disc">
+            <span class="k">Problem</span><span>Different lead categories need different qualification: a company buying training and a council assessing funding eligibility aren't the same conversation.</span>
+            <span class="k">Question</span><span class="quote">“How does your team currently decide which leads deserve attention first?”</span>
+            <span class="k">Solution</span><span>Validation, classification, scoring and a human-review step, so each lead type's criteria are explicit.</span>
+            <span class="k">Value</span><span>More consistent triage and clearer priorities, subject to real-world validation.</span>
+          </div>
+        </div>
+        <div class="qs">
+          <span class="label">From the S&amp;P 500 opportunity: two questions I'd now ask earlier</span>
+          <div class="qcard"><p class="q">“Who else needs to sign off before this can move forward?”</p><p class="r"><b>Reveals</b> the real decision-makers while there's still time to bring them into the conversation.</p></div>
+          <div class="qcard"><p class="q">“Walk me through what happens internally once your team decides to go ahead.”</p><p class="r"><b>Reveals</b> the actual buying process, and where a deal could stall after the champion says yes.</p></div>
+        </div>
+      </div>
+      <div class="repos">
+        <a class="repo" href="https://github.com/Funmi-ai/niyo-lead-crm-poc" target="_blank" rel="noopener"><span>↗</span> niyo-lead-crm-poc</a>
+        <a class="repo" href="https://github.com/Funmi-ai/threelittlereaders-agent-pipeline" target="_blank" rel="noopener"><span>↗</span> threelittlereaders-agent-pipeline</a>
+      </div>
+      <p class="foot"><a href="https://github.com/Funmi-ai" target="_blank" rel="noopener" style="color:inherit;">github.com/Funmi-ai</a></p>
+    </div>
+  </section>
+</div>
+
+<button class="side-arrow left" id="prev" aria-label="Previous section">←</button>
+<button class="side-arrow right" id="next" aria-label="Next section">→</button>
+<div class="navwrap"><nav class="bar" aria-label="Sections">
+  <button class="bar-arrow" id="prevM" aria-label="Previous section">←</button>
+  <span class="count" id="count">00 / 05</span><div class="tabs" id="tabs"></div>
+  <button class="bar-arrow" id="nextM" aria-label="Next section">→</button>
+</nav></div>
+
+<script>
+(function(){
+  var reduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* ================= navigation ================= */
+  var PANELS = [
+    {id:'p-intro', hash:'intro', label:'Intro'},
+    {id:'p-commercial', hash:'commercial', label:'Commercial'},
+    {id:'p-qualification', hash:'qualification', label:'Qualification'},
+    {id:'p-agents', hash:'agents', label:'Agents'},
+    {id:'p-temporal', hash:'temporal', label:'Temporal'},
+    {id:'p-conversations', hash:'conversations', label:'Conversations'}
+  ];
+  var deck = document.getElementById('deck');
+  var panels = PANELS.map(function(p){ return document.getElementById(p.id); });
+  var prevBtn = document.getElementById('prev'), nextBtn = document.getElementById('next');
+  var prevM = document.getElementById('prevM'), nextM = document.getElementById('nextM');
+  var countEl = document.getElementById('count'), tabsEl = document.getElementById('tabs');
+  var active = -1, pending = null, settle = null, focusOnSettle = false;
+
+  function indexOfHash(h){ h = (h || '').replace('#',''); for (var i=0;i<PANELS.length;i++){ if (PANELS[i].hash === h) return i; } return -1; }
+  function current(){ return Math.round(deck.scrollLeft / deck.clientWidth); }
+  function pad(n){ return (n < 10 ? '0' : '') + n; }
+
+  var tabs = PANELS.map(function(p, i){
+    var b = document.createElement('button');
+    b.className = 'tab'; b.textContent = p.label;
+    b.setAttribute('aria-label', (i ? pad(i) + ' ' : '') + p.label);
+    b.addEventListener('click', function(){ goTo(i, true); });
+    tabsEl.appendChild(b);
+    return b;
+  });
+
+  function goTo(i, withFocus){
+    i = Math.max(0, Math.min(panels.length - 1, i));
+    pending = i; focusOnSettle = !!withFocus;
+    if (i === current()){ sync(); settled(); return; }
+    deck.scrollTo({left: i * deck.clientWidth, behavior: reduced ? 'auto' : 'smooth'});
+    // Don't rely only on scroll events (some browsers throttle them): settle explicitly too.
+    clearTimeout(settle);
+    settle = setTimeout(function(){ sync(); settled(); }, reduced ? 30 : 650);
+  }
+  function step(d){ goTo((pending !== null ? pending : current()) + d, true); }
+
+  function sync(){
+    var i = current();
+    if (i === active) return;
+    active = i;
+    tabs.forEach(function(t, k){ if (k === i) t.setAttribute('aria-current','true'); else t.removeAttribute('aria-current'); });
+    prevBtn.disabled = prevM.disabled = i === 0; nextBtn.disabled = nextM.disabled = i === panels.length - 1;
+    countEl.textContent = pad(i) + ' / ' + pad(panels.length - 1);
+    try { history.replaceState(null, '', '#' + PANELS[i].hash); } catch(e){}
+  }
+  function settled(){
+    pending = null;
+    var i = current();
+    panels.forEach(function(p, k){ if (k === i) p.removeAttribute('inert'); else p.setAttribute('inert',''); });
+    if (focusOnSettle){
+      var h = panels[i].querySelector('h1,h2');
+      if (h) h.focus({preventScroll:true});
+      focusOnSettle = false;
+    }
+  }
+  deck.addEventListener('scroll', function(){ sync(); clearTimeout(settle); settle = setTimeout(settled, 140); }, {passive:true});
+  window.addEventListener('resize', function(){ deck.scrollTo({left: active * deck.clientWidth, behavior:'instant'}); });
+  window.addEventListener('hashchange', function(){ var i = indexOfHash(location.hash); if (i > -1 && i !== current()) goTo(i, true); });
+  prevBtn.addEventListener('click', function(){ step(-1); });
+  nextBtn.addEventListener('click', function(){ step(1); });
+  prevM.addEventListener('click', function(){ step(-1); });
+  nextM.addEventListener('click', function(){ step(1); });
+  Array.prototype.forEach.call(document.querySelectorAll('[data-go]'), function(b){
+    b.addEventListener('click', function(){ goTo(indexOfHash(b.getAttribute('data-go')), true); });
+  });
+  window.addEventListener('keydown', function(e){
+    if (e.altKey || e.ctrlKey || e.metaKey) return;
+    if (e.key === 'ArrowRight' || e.key === 'PageDown'){ e.preventDefault(); step(1); }
+    else if (e.key === 'ArrowLeft' || e.key === 'PageUp'){ e.preventDefault(); step(-1); }
+    else if (e.key === 'Home'){ e.preventDefault(); goTo(0, true); }
+    else if (e.key === 'End'){ e.preventDefault(); goTo(panels.length - 1, true); }
+    else if (e.key.length === 1 && e.key >= '1' && e.key <= '5'){ goTo(+e.key, true); }
+    else if (e.key === '0'){ goTo(0, true); }
+  });
+  // A plain mouse wheel can't scroll sideways: page on vertical wheel once the panel has no more to scroll.
+  var wheelLock = false;
+  deck.addEventListener('wheel', function(e){
+    if (Math.abs(e.deltaX) > Math.abs(e.deltaY)) return;
+    var p = panels[current()];
+    var atTop = p.scrollTop <= 0, atBottom = p.scrollTop + p.clientHeight >= p.scrollHeight - 2;
+    if ((e.deltaY > 0 && !atBottom) || (e.deltaY < 0 && !atTop)) return;
+    e.preventDefault();
+    if (wheelLock || Math.abs(e.deltaY) < 8) return;
+    wheelLock = true; step(e.deltaY > 0 ? 1 : -1);
+    setTimeout(function(){ wheelLock = false; }, 900);
+  }, {passive:false});
+
+  var start = indexOfHash(location.hash);
+  if (start > 0) deck.scrollTo({left: start * deck.clientWidth, behavior:'instant'});
+  sync(); settled();
+
+  /* ================= 02 stakeholder timeline ================= */
+  var MILESTONES = [
+    {label:'CMO as champion', dot:'1', text:'The CMO of an S&P 500 company championed a proposed $15,000 AI automation engagement internally.'},
+    {label:'Seven conversations', dots:7, text:'Seven stakeholder conversations moved the engagement forward, with the CMO championing it throughout.'},
+    {label:'Contract stage', dot:'✓', text:'The proposed engagement reached contract stage.'},
+    {label:'New decision-maker', dot:'?', gap:true, text:'The contract went to the final decision-maker, who hadn’t been part of any of the seven conversations.'},
+    {label:'Never signed', dot:'✕', stall:true, text:'Momentum stalled and the agreement was never signed.'}
+  ];
+  var tl = document.getElementById('timeline'), tlDetail = document.getElementById('tlDetail');
+  var msButtons = MILESTONES.map(function(m, i){
+    var li = document.createElement('li'); if (m.gap) li.className = 'gap';
+    var b = document.createElement('button'); b.className = 'ms' + (m.stall ? ' stall' : '');
+    var dot = m.dots ? '<span class="dot dots">' + new Array(m.dots + 1).join('<i></i>') + '</span>' : '<span class="dot">' + m.dot + '</span>';
+    b.innerHTML = dot + '<span class="lbl">' + m.label + '</span>';
+    b.addEventListener('click', function(){ showMilestone(i); });
+    li.appendChild(b); tl.appendChild(li);
+    return b;
+  });
+  function showMilestone(i){
+    msButtons.forEach(function(b, k){ b.setAttribute('aria-pressed', k === i ? 'true' : 'false'); });
+    tlDetail.innerHTML = '<span class="step">Step ' + (i + 1) + ' of ' + MILESTONES.length + ' · ' + MILESTONES[i].label + '</span><p>' + MILESTONES[i].text + '</p>';
+  }
+  showMilestone(0);
+
+  /* ================= 03 qualification: stages + demo ================= */
+  var STAGES = [
+    {s:'Import', d:'Loads raw leads from a CSV or JSON file.'},
+    {s:'Validate', d:'Normalises fields and flags malformed emails or missing information. It records problems; it doesn’t stop the run.'},
+    {s:'Dedupe', d:'Matches on email, or on organisation and contact name together, so similar names alone don’t merge two people.'},
+    {s:'Classify', d:'Routes each lead to the private-sector or the publicly-funded pipeline.'},
+    {s:'Score', d:'Scores 0–100 against configurable rules: 70+ is prioritised, 40+ is nurtured. Missing information flags the lead for human review.'},
+    {s:'Draft outreach', d:'Drafts an initial email and two follow-ups from templates. Skipped for duplicates and do-not-contact leads.'},
+    {s:'CRM write', d:'A simulated CRM update through a swappable interface: company, contact, deal, task and activity log.'},
+    {s:'Summary', d:'Writes the run summary and the recommended next action for each lead.'}
+  ];
+  var LEADS = {
+    strong: {label:'Strong lead', org:'Castlemere Logistics Ltd', title:'Head of Learning & Development',
+      result:{status:'Qualified', cls:'ok', score:'82 / 100', action:'Prioritise: send initial outreach', followup:'Review & approve outreach, due in 2 days', why:'Decision-maker and budget confirmed, so it clears the 70-point prioritise threshold.'},
+      steps:[['ok','No issues: email and required fields present.'],['ok','No issues found.'],['ok','No match against existing records.'],['ok','Private-sector pipeline (confirmed organisation type).'],['ok','82/100: decision-maker and budget confirmed. Above the 70-point prioritise threshold.'],['ok','Initial email + 2 follow-ups generated from the template.'],['ok','Company, contact and deal upserted; review task due in 2 days.'],['ok','Next action: prioritise and send initial outreach.']]},
+    duplicate: {label:'Duplicate lead', org:'Harrow Tech Solutions', title:'VP Engineering',
+      result:{status:'Excluded: duplicate', cls:'dup', score:'Not used', action:'Merge the duplicate record; don’t contact separately', followup:'No task created', why:'Same organisation and contact as a lead already in the CRM, so it\u2019s excluded from outreach.'},
+      steps:[['ok','Loaded from the synthetic dataset.'],['ok','No issues found.'],['dup','Matches an existing record on organisation and contact name.'],['ok','Private-sector pipeline.'],['ok','Scoring runs, but the duplicate flag overrides the outcome.'],['dup','Skipped: duplicates are excluded from outreach by design.'],['dup','Flagged as a duplicate and logged. No task created.'],['ok','Next action: merge the duplicate record.']]},
+    incomplete: {label:'Incomplete lead', org:'Granville Partners LLP', title:'Partner, People & Culture',
+      result:{status:'Needs human review', cls:'warn', score:'40 / 100', action:'Research and review before outreach', followup:'Research / qualify task, due in 3 days', why:'Decision-maker and budget are unknown, so the score stays below 70 and a person checks it first.'},
+      steps:[['ok','Loaded from the synthetic dataset.'],['warn','Decision-maker and budget status are both “Unknown”. Recorded; the run continues.'],['ok','No match found.'],['ok','Private-sector pipeline.'],['warn','40/100: below the 70-point threshold, and missing fields set human review.'],['ok','Drafted anyway: a review flag changes the follow-up task, not the drafting.'],['ok','Research task created, due in 3 days instead of the 2-day fast track.'],['ok','Next action: research and human review before outreach.']]}
+  };
+  var MARK = {ok:'✓', warn:'!', dup:'✕'};
+  var stagesEl = document.getElementById('stages'), stageDetail = document.getElementById('stageDetail');
+  var stageBtns = STAGES.map(function(st, i){
+    var li = document.createElement('li');
+    var b = document.createElement('button'); b.className = 'stage';
+    b.innerHTML = '<span class="i"><span>' + (i + 1) + '</span><span class="mark"></span></span><span class="s">' + st.s + '</span>';
+    b.addEventListener('click', function(){ showStage(i); });
+    li.appendChild(b); stagesEl.appendChild(li);
+    return b;
+  });
+  var currentLead = null;
+  function showStage(i){
+    stageBtns.forEach(function(b, k){ b.setAttribute('aria-pressed', k === i ? 'true' : 'false'); });
+    var extra = currentLead ? ' <br><b>For this lead:</b> ' + LEADS[currentLead].steps[i][1] : '';
+    stageDetail.innerHTML = '<b>' + (i + 1) + ' · ' + STAGES[i].s + '.</b> ' + STAGES[i].d + extra;
+  }
+  showStage(0);
+
+  var picker = document.getElementById('picker'), result = document.getElementById('result');
+  var trace = document.getElementById('trace'), traceBox = document.getElementById('traceBox'), demoHint = document.getElementById('demoHint');
+  var pickBtns = Object.keys(LEADS).map(function(key){
+    var b = document.createElement('button'); b.className = 'pick'; b.textContent = LEADS[key].label;
+    b.setAttribute('aria-pressed','false');
+    b.addEventListener('click', function(){ runLead(key); });
+    picker.appendChild(b);
+    return {key:key, b:b};
+  });
+  function runLead(key){
+    currentLead = key;
+    var L = LEADS[key], r = L.result;
+    pickBtns.forEach(function(p){ p.b.setAttribute('aria-pressed', p.key === key ? 'true' : 'false'); });
+    demoHint.textContent = L.org + ' · ' + L.title;
+    result.innerHTML =
+      '<div class="rf"><div class="k">Qualification status</div><div class="v ' + r.cls + '">' + r.status + '</div></div>' +
+      '<div class="rf"><div class="k">Score</div><div class="v">' + r.score + '</div></div>' +
+      '<div class="rf"><div class="k">Recommended next action</div><div class="v">' + r.action + '</div></div>' +
+      '<div class="rf"><div class="k">Follow-up timing</div><div class="v">' + r.followup + '</div></div>' +
+      '<div class="rf full"><div class="k">Why</div><div class="v why">' + r.why + '</div></div>';
+    trace.innerHTML = L.steps.map(function(s, i){
+      return '<div><span class="p ' + s[0] + '">' + STAGES[i].s + '</span><span>' + s[1] + '</span></div>';
+    }).join('');
+    traceBox.hidden = false; traceBox.open = false;
+    stageBtns.forEach(function(b, i){
+      var st = L.steps[i][0];
+      b.classList.remove('ok','warn','dup'); b.classList.add(st);
+      b.querySelector('.mark').textContent = MARK[st];
+      b.setAttribute('aria-label', (i + 1) + ' ' + STAGES[i].s + ': ' + (st === 'ok' ? 'passed' : st === 'warn' ? 'flagged' : 'excluded'));
+    });
+    var firstIssue = L.steps.findIndex(function(s){ return s[0] !== 'ok'; });
+    showStage(firstIssue > -1 ? firstIssue : 4);
+  }
+
+  /* ================= 04 agents ================= */
+  var AGENTS = {
+    researcher:{n:'Researcher', id:'ig-researcher', m:'sonnet', when:'After intake, and every weekly review', d:'Writes a short research note for each post: the closest past post and how it did, the format, what it tests and a watch-out. Researches new formats on the web, and prepares the weekly review whose learnings go back into the playbooks.'},
+    hooks:{n:'Hook Generator', id:'ig-hook-generator', m:'opus', when:'Once a post is briefed', d:'Writes three cover and opening-line options and stars one, checked against live patterns from past posts. Runs on Opus because the voice is on the line.'},
+    audience:{n:'Audience Filter', id:'ig-sally-filter', m:'sonnet', when:'After hooks, then again after copy', d:'Reads the work as the target audience would: a scored rubric, what isn’t working, ranked hooks and a publish / revise / hold verdict. It writes recommendations only and never edits anyone else’s section.'},
+    copy:{n:'Copywriter', id:'ig-copywriter', m:'opus', when:'After I pick a hook', d:'Writes the on-screen story and caption for reels, the caption for carousels, and the repurposed Story and Threads lines, in my voice. Runs on Opus because the voice is on the line.'},
+    carousel:{n:'Carousel Builder', id:'ig-carousel-builder', m:'sonnet', when:'Carousel posts only', d:'Writes the slide outline, then builds the approved outline in Canva by cloning one good page rather than starting from blank.'},
+    designer:{n:'Designer', id:'ig-designer', m:'sonnet', when:'After the copy is drafted', d:'Specifies the reel cover in the house style, and runs the design checklist on built carousels.'},
+    format:{n:'Format Analyst', id:'ig-format-analyst', m:'sonnet', when:'After an outlier scan', d:'Reverse-engineers videos that outperformed their creator’s usual results: why each one worked, which existing format it maps to, and the interview question that turns it into my own take.'}
+  };
+  var agentDetail = document.getElementById('agentDetail');
+  var agentBtns = Array.prototype.slice.call(document.querySelectorAll('button[data-agent]'));
+  function showAgent(key){
+    agentBtns.forEach(function(b){ b.setAttribute('aria-pressed', b.getAttribute('data-agent') === key ? 'true' : 'false'); });
+    var a = AGENTS[key];
+    agentDetail.innerHTML = '<h3>' + a.n + '</h3><div class="meta"><span class="model ' + a.m + '">' + (a.m === 'opus' ? 'Opus' : 'Sonnet') + '</span><span class="f">' + a.id + ' · ' + a.when + '</span></div><p>' + a.d + '</p>';
+  }
+  agentBtns.forEach(function(b){ b.addEventListener('click', function(){ showAgent(b.getAttribute('data-agent')); }); });
+  showAgent('researcher');
+
+  /* ================= 05 temporal comparison ================= */
+  var laneA = document.getElementById('laneA'), laneB = document.getElementById('laneB');
+  var outA = document.getElementById('outA'), outB = document.getElementById('outB');
+  function chips(el, n){ el.innerHTML = ''; var out = []; for (var i=1;i<=n;i++){ var s = document.createElement('span'); s.className = 'st'; s.textContent = 'Step ' + i; el.appendChild(s); out.push(s); } return out; }
+  var A, B, timers = [];
+  function resetLanes(){
+    timers.forEach(clearTimeout); timers = [];
+    A = chips(laneA, 5); B = chips(laneB, 5);
+    outA.textContent = 'Each run is logged, so you can inspect afterwards which step failed.';
+    outB.textContent = 'Each event is recorded in the workflow\u2019s event history as it runs.';
+  }
+  function at(ms, fn){ timers.push(setTimeout(fn, reduced ? 0 : ms)); }
+  function play(){
+    resetLanes();
+    at(300, function(){ A[0].className='st done'; B[0].className='st done'; });
+    at(700, function(){ A[1].className='st done'; B[1].className='st done'; });
+    at(1100, function(){ A[2].className='st fail'; B[2].className='st fail'; A[2].textContent='Step 3 ✕'; B[2].textContent='Step 3 ✕';
+      outA.textContent = 'The run stops at step 3. The execution log shows where; someone investigates and decides how to re-run the rest.'; });
+    at(1500, function(){ A[3].className='st halt'; A[4].className='st halt';
+      B[2].className='st retry'; B[2].textContent='Step 3 ↻ retry';
+      outB.textContent = 'Step 3 is retried under its retry policy. If the process itself had crashed, the workflow would be replayed against its event history to rebuild its state.'; });
+    at(2100, function(){ B[2].className='st done'; B[2].textContent='Step 3 ✓'; });
+    at(2500, function(){ B[3].className='st done'; });
+    at(2900, function(){ B[4].className='st done'; outB.textContent = 'Steps 1 and 2 aren\u2019t re-executed on replay: their recorded results come from the history, and the workflow finishes.'; });
+  }
+  resetLanes();
+  document.getElementById('playBtn').addEventListener('click', play);
+})();
+</script>
+</body>
+</html>
