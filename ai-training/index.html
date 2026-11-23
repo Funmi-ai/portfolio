@@ -122,7 +122,13 @@ details ul b{color:var(--ink); font-weight:600;}
   .seg{height:auto; flex-direction:row; align-items:center; gap:10px; border-top-width:1px; border-left:3px solid var(--ph);}
   .seg[aria-pressed="true"]{border-top-width:1px;}
 }
-.seg-detail{display:grid; grid-template-columns:110px minmax(0,1fr); gap:10px 16px; font-size:14.5px; min-height:150px; align-content:start;}
+.seg-detail{display:grid; grid-template-columns:110px minmax(0,1fr); gap:10px 16px; font-size:14.5px; align-content:start;}
+.seg-card{display:flex; flex-direction:column; gap:18px; border-top:3px solid var(--ph, var(--line));}
+.subcard{background:var(--surface-2); border-radius:12px; padding:16px;}
+.subcard .pt, .subcard .assembled, .subcard .rf{background:var(--surface);}
+.seg-extra[hidden]{display:none;}
+.seg-nav{display:flex; justify-content:space-between; gap:10px; border-top:1px solid var(--line); padding-top:14px;}
+.small-btn:disabled{opacity:.3; cursor:default;}
 .seg-detail .k{padding-top:3px;}
 .seg-detail .t{font-family:var(--display); font-size:22px; grid-column:1/-1; display:flex; align-items:baseline; gap:12px; flex-wrap:wrap;}
 .seg-detail .t small{font-family:var(--mono); font-size:11.5px; color:var(--ph);}
@@ -276,15 +282,15 @@ details ul b{color:var(--ink); font-weight:600;}
         </figure>
       </div>
       <div class="proofs">
-        <button class="proof" data-go="maze"><span class="n">01 · Discover</span><span class="t">Two games that show how AI responds</span><span class="f">The Maze · Build the Bot</span></button>
-        <button class="proof" data-go="pro"><span class="n">02 · Name it</span><span class="t">A framework learners find for themselves</span><span class="f">PRO: Persona, Role, Output</span></button>
-        <button class="proof" data-go="apply"><span class="n">03 · Apply</span><span class="t">From team practice to their own goals</span><span class="f">Prompt Builder · Prompt &amp; Profit</span></button>
+        <button class="proof" data-seg="1"><span class="n">01 · Discover</span><span class="t">Two games that show how AI responds</span><span class="f">The Maze · Build the Bot</span></button>
+        <button class="proof" data-seg="3"><span class="n">02 · Name it</span><span class="t">A framework learners find for themselves</span><span class="f">PRO: Persona, Role, Output</span></button>
+        <button class="proof" data-seg="7"><span class="n">03 · Apply</span><span class="t">From team practice to their own goals</span><span class="f">Prompt Builder · Prompt &amp; Profit</span></button>
       </div>
-      <div class="hint">Swipe, use ← →, or jump to any section · try the maze and the prompt builder · about three minutes end to end</div>
+      <div class="hint">Swipe or use ← → · on the session page, click any activity to open it · try the maze and the prompt builder</div>
     </div>
   </section>
 
-  <!-- ===================== 01 SESSION ===================== -->
+  <!-- ===================== 01 SESSION (expanded) ===================== -->
   <section class="panel" id="p-session" aria-label="01 The session">
     <div class="inner">
       <div class="head">
@@ -293,13 +299,100 @@ details ul b{color:var(--ink); font-weight:600;}
         <p class="lede">Beginners are often shown which buttons to press without learning why AI responds the way it does. My aim was for the room to understand how AI responds to information and instructions, and to leave confident they could work out their own prompts.</p>
       </div>
       <div class="facts"><span>ProJourno Masterclass Series</span><span>Tanzania · 30 May 2025</span><span>2:00–4:00 pm · planned as 90 min, ran over</span><span>50+ professionals</span><span>Mostly new to generative AI</span><span>Designed and facilitated on my own</span></div>
-      <div class="phases" aria-hidden="true"><span class="ph-discover"><i></i>Discover</span><span class="ph-name"><i></i>Name it</span><span class="ph-practise"><i></i>Practise</span><span class="ph-apply"><i></i>Apply</span></div>
-      <ol class="bar90" id="bar90" aria-label="Session timeline: select an activity"></ol>
-      <div class="card seg-detail" id="segDetail" aria-live="polite"></div>
       <div class="slides-link">
         <a class="repo" href="pdf/ProJourno_Slides_as_presented.pdf" target="_blank" rel="noopener"><span>↓</span> The slides as presented · 10 slides (PDF)</a>
         <p class="foot">Deliberately light: most of the teaching happened out loud and through the games. Shown as they were on the day, with one typo corrected.</p>
       </div>
+      <div class="phases" aria-hidden="true"><span class="ph-discover"><i></i>Discover</span><span class="ph-name"><i></i>Name it</span><span class="ph-practise"><i></i>Practise</span><span class="ph-apply"><i></i>Apply</span><span class="hint" style="margin-left:auto;">Click any activity to open it</span></div>
+      <ol class="bar90" id="bar90" aria-label="Session timeline: select an activity"></ol>
+
+      <div class="card seg-card" id="segCard">
+        <div class="seg-detail" id="segDetail" aria-live="polite"></div>
+
+        <!-- The Maze -->
+        <div class="seg-extra" data-for="maze" hidden>
+          <div class="split">
+            <div class="subcard maze-wrap">
+              <span class="sim">Try a small version · find the hidden path from the bottom row to the top</span>
+              <span class="maze-end">↑ EXIT</span>
+              <div class="maze" id="mazeGrid" role="grid" aria-label="Puzzle-mat maze, 4 by 4"></div>
+              <span class="maze-end">START ↑ (pick a mat on the bottom row)</span>
+              <p class="maze-msg" id="mazeMsg" aria-live="polite">Pick a mat on the bottom row to step on.</p>
+              <button class="small-btn" id="mazeReset">Reset the maze</button>
+            </div>
+            <div class="stack">
+              <div class="subcard rules">
+                <span class="k">Teams</span><span>Four, taking turns</span>
+                <span class="k">Rules</span><span>No diagonal steps. I only answer “correct” or “incorrect”. A wrong step and the next team starts. The first team to get three members out wins.</span>
+                <span class="k">Land</span><span>Even though you didn’t know the path, you figured it out.</span>
+              </div>
+              <div class="reveal" id="mazeReveal" hidden>
+                <span class="label">Then the slide</span>
+                <p class="quote" style="font-size:18px; margin-top:6px;">“AI doesn’t understand things the way we do. It learns patterns from huge numbers of examples, then predicts what’s most likely to come next.”</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Build the Bot -->
+        <div class="seg-extra" data-for="bot" hidden>
+          <div class="split wide-left">
+            <div class="subcard stack">
+              <span class="sim">Pick a team to see what they had to work from</span>
+              <div class="picker" id="teamPicker" aria-label="Teams"></div>
+              <div class="inputs" id="teamInputs" aria-live="polite"></div>
+              <div><span class="k">Like asking AI…</span><p class="like" id="teamLike" style="margin-top:6px;"></p></div>
+              <details>
+                <summary>Read the written prompt</summary>
+                <div class="body prompt-text">
+                  <p><b style="color:var(--ink)">Text Prompt: Build a geometric shape</b></p>
+                  <p>Start with a cube made from 6 blank square faces — like a cardboard box. On each of the 4 vertical sides (not top or bottom), place two flat square shapes. Arrange the two squares on each face so they are angled inward diagonally, with their points facing toward the centre of the cube’s face (like two triangles touching tips). Repeat this exact square arrangement on the remaining three vertical sides of the cube. Do not place any shapes on the top or bottom of the cube.</p>
+                </div>
+              </details>
+            </div>
+            <figure class="bot-fig">
+              <img src="img/bot.png" alt="The target bot: a cube built from magnetic tiles, with two squares angled out from each side." width="480" height="640" loading="lazy">
+              <figcaption>The bot every team was aiming for</figcaption>
+            </figure>
+          </div>
+        </div>
+
+        <!-- PRO Deck -->
+        <div class="seg-extra" data-for="pro" hidden>
+          <div class="pro-defs">
+            <div class="pro-def cp"><span class="L">P</span><span class="w">Persona</span><p>Who the AI should be. “You are a…”</p></div>
+            <div class="pro-def cr"><span class="L">R</span><span class="w">Role</span><p>Who the AI is helping, and their situation. “Act like you’re helping someone who is…”</p></div>
+            <div class="pro-def co"><span class="L">O</span><span class="w">Output</span><p>How the answer should be explained or set out. “Explain it…”</p></div>
+          </div>
+          <p class="foot" style="margin-top:10px;">Persona is about the AI; Role is about the person on the receiving end.</p>
+        </div>
+
+        <!-- Prompt Builder -->
+        <div class="seg-extra" data-for="builder" hidden>
+          <div class="subcard stack">
+            <span class="sim">Try the Prompt Builder · options from the original worksheet</span>
+            <div class="opt-group cp"><span class="k">P · Persona: You are a…</span><div class="opts" data-slot="p"></div></div>
+            <div class="opt-group cr"><span class="k">R · Role: Act like you’re helping someone who is…</span><div class="opts" data-slot="r"></div></div>
+            <div class="opt-group co"><span class="k">O · Output: Explain it…</span><div class="opts" data-slot="o"></div></div>
+            <p class="assembled" id="assembled" aria-live="polite"></p>
+          </div>
+        </div>
+
+        <!-- Prompt & Profit -->
+        <div class="seg-extra" data-for="apply" hidden>
+          <div class="subcard stack">
+            <div class="ptabs" id="ptabs" aria-label="The four prompts"></div>
+            <div class="pcard" id="pcard" aria-live="polite"></div>
+          </div>
+          <p class="foot" style="margin-top:10px;">Prompts 3 and 4 have been reworded since the session so nothing reads as a promise of income: learners are asked to test ideas and be realistic about the effort.</p>
+        </div>
+
+        <div class="seg-nav">
+          <button class="small-btn" id="segPrev">← Previous activity</button>
+          <button class="small-btn" id="segNext">Next activity →</button>
+        </div>
+      </div>
+
       <details>
         <summary>Decisions I made as a facilitator</summary>
         <div class="body"><ul>
@@ -314,138 +407,11 @@ details ul b{color:var(--ink); font-weight:600;}
     </div>
   </section>
 
-  <!-- ===================== 02 MAZE ===================== -->
-  <section class="panel" id="p-maze" aria-label="02 The Maze">
-    <div class="inner">
-      <div class="head">
-        <span class="label">02 · Discover · The Maze</span>
-        <h2 tabindex="-1">You don’t need the map to find the path.</h2>
-        <p class="lede">Puzzle mats on the floor become a grid with one hidden path. Teams step through one mat at a time, and I can only say “correct” or “incorrect”. Even though nobody saw the path, through trial and error they were able to find it.</p>
-      </div>
-      <div class="split">
-        <div class="card maze-wrap">
-          <span class="sim">Try a small version · find the hidden path from the bottom row to the top</span>
-          <span class="maze-end">↑ EXIT</span>
-          <div class="maze" id="mazeGrid" role="grid" aria-label="Puzzle-mat maze, 4 by 4"></div>
-          <span class="maze-end">START ↑ (pick a mat on the bottom row)</span>
-          <p class="maze-msg" id="mazeMsg" aria-live="polite">Pick a mat on the bottom row to step on.</p>
-          <button class="small-btn" id="mazeReset">Reset the maze</button>
-        </div>
-        <div class="stack">
-          <div class="card rules">
-            <span class="k">Teams</span><span>Four, taking turns</span>
-            <span class="k">Rules</span><span>No diagonal steps. I only answer “correct” or “incorrect”. A wrong step and the next team starts. The first team to get three members out wins.</span>
-            <span class="k">Ask</span><span class="quote">“How did you find the challenge?”</span>
-            <span class="k">Land</span><span>Even though you didn’t know the path, you figured it out.</span>
-          </div>
-          <div class="reveal" id="mazeReveal" hidden>
-            <span class="label">Then the slide</span>
-            <p class="quote" style="font-size:18px; margin-top:6px;">“AI doesn’t understand things the way we do. It learns patterns from huge numbers of examples, then predicts what’s most likely to come next.”</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ===================== 03 BUILD THE BOT ===================== -->
-  <section class="panel" id="p-bot" aria-label="03 Build the Bot">
-    <div class="inner">
-      <div class="head">
-        <span class="label">03 · Discover · Build the Bot</span>
-        <h2 tabindex="-1">Same bot. Four different briefs.</h2>
-        <p class="lede">Four teams get the same magnetic tiles and three minutes to build this bot, but each team gets different information. Then we compare the builds, before any prompting has been taught.</p>
-      </div>
-      <div class="split wide-left">
-        <div class="card stack">
-          <span class="sim">Pick a team to see what they had to work from</span>
-          <div class="picker" id="teamPicker" aria-label="Teams"></div>
-          <div class="inputs" id="teamInputs" aria-live="polite"></div>
-          <div><span class="k">Like asking AI…</span><p class="like" id="teamLike" style="margin-top:6px;"></p></div>
-          <details>
-            <summary>Read the written prompt</summary>
-            <div class="body prompt-text">
-              <p><b style="color:var(--ink)">Text Prompt: Build a geometric shape</b></p>
-              <p>Start with a cube made from 6 blank square faces — like a cardboard box. On each of the 4 vertical sides (not top or bottom), place two flat square shapes. Arrange the two squares on each face so they are angled inward diagonally, with their points facing toward the centre of the cube’s face (like two triangles touching tips). Repeat this exact square arrangement on the remaining three vertical sides of the cube. Do not place any shapes on the top or bottom of the cube.</p>
-            </div>
-          </details>
-        </div>
-        <div class="stack">
-          <figure class="bot-fig">
-            <img src="img/bot.png" alt="The target bot: a cube built from magnetic tiles, with two squares angled out from each side." width="480" height="640" loading="lazy">
-            <figcaption>The bot every team was aiming for</figcaption>
-          </figure>
-          <div class="card rules">
-            <span class="k">Ask</span><span class="quote">“What tools did you have? What made it easier or harder?”</span>
-          </div>
-        </div>
-      </div>
-      <div class="lesson"><span class="label">On the slide</span><p class="q">“Your Input = The Output.” “Better prompts = better answers.”</p></div>
-    </div>
-  </section>
-
-  <!-- ===================== 04 PRO ===================== -->
-  <section class="panel" id="p-pro" aria-label="04 The PRO framework">
-    <div class="inner">
-      <div class="head">
-        <span class="label">04 · Name it · PRO</span>
-        <h2 tabindex="-1">A framework they find for themselves.</h2>
-        <p class="lede">Teams piece together PRO sentence cards until someone spots the pattern. Only then does the framework get its name.</p>
-      </div>
-      <div class="pro-defs">
-        <div class="pro-def cp"><span class="L">P</span><span class="w">Persona</span><p>Who the AI should be. “You are a…”</p></div>
-        <div class="pro-def cr"><span class="L">R</span><span class="w">Role</span><p>Who the AI is helping, and their situation. “Act like you’re helping someone who is…”</p></div>
-        <div class="pro-def co"><span class="L">O</span><span class="w">Output</span><p>How the answer should be explained or set out. “Explain it…”</p></div>
-      </div>
-      <div class="split wide-right">
-        <div class="stack">
-          <span class="label">How I taught it</span>
-          <ol class="taught">
-            <li><span><b>PRO Deck (10 min, teams).</b> Teams assemble the sentence cards. “What pattern can you see? What does it spell?”</span></li>
-            <li><span><b>Prompt Builder (10 min, teams).</b> One letter at a time, with example options for each, then the full prompt.</span></li>
-            <li><span><b>Read it out.</b> Volunteers share their prompts while I walk the room.</span></li>
-            <li><span><b>See it live.</b> One team’s prompt goes into ChatGPT next to a vague one.</span></li>
-          </ol>
-          <div class="lesson"><span class="label">On the slide</span><p class="q">“You don’t just tell AI what to do — you guide how it does it.”</p></div>
-        </div>
-        <div class="card stack">
-          <span class="sim">Try the Prompt Builder · options from the original worksheet</span>
-          <div class="opt-group cp"><span class="k">P · Persona: You are a…</span><div class="opts" data-slot="p"></div></div>
-          <div class="opt-group cr"><span class="k">R · Role: Act like you’re helping someone who is…</span><div class="opts" data-slot="r"></div></div>
-          <div class="opt-group co"><span class="k">O · Output: Explain it…</span><div class="opts" data-slot="o"></div></div>
-          <p class="assembled" id="assembled" aria-live="polite"></p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ===================== 05 APPLY ===================== -->
-  <section class="panel" id="p-apply" aria-label="05 Apply">
-    <div class="inner">
-      <div class="head">
-        <span class="label">05 · Apply · Prompt &amp; Profit</span>
-        <h2 class="long" tabindex="-1">From team practice to their own goals.</h2>
-        <p class="lede">The last 20 minutes are individual. Each person works through four prompts in ChatGPT, each building on the one before, while I walk the room coaching one to one.</p>
-      </div>
-      <div class="split wide-right">
-        <div class="break-card">
-          <span class="label">Set up at the break</span>
-          <p class="q2">“What’s a business idea you’ve always had but never pursued?”</p>
-          <p class="muted" style="font-size:14px;">Write it down. Don’t just think it. This could be the first step to building it. We’ll discuss after the break.</p>
-        </div>
-        <div class="card stack">
-          <div class="ptabs" id="ptabs" aria-label="The four prompts"></div>
-          <div class="pcard" id="pcard" aria-live="polite"></div>
-        </div>
-      </div>
-      <p class="foot">Prompts 3 and 4 have been reworded since the session so nothing reads as a promise of income: learners are asked to test ideas and be realistic about the effort.</p>
-    </div>
-  </section>
-
   <!-- ===================== 06 CHECKS + MATERIALS ===================== -->
-  <section class="panel" id="p-checks" aria-label="06 Checking understanding and materials">
+  <section class="panel" id="p-checks" aria-label="02 Checking understanding and materials">
     <div class="inner">
       <div class="head">
-        <span class="label">06 · Checking it landed</span>
+        <span class="label">02 · Checking it landed</span>
         <h2 tabindex="-1">Every activity ends with a question.</h2>
       </div>
       <div class="split">
@@ -495,7 +461,7 @@ details ul b{color:var(--ink); font-weight:600;}
 <button class="side-arrow right" id="next" aria-label="Next section">→</button>
 <div class="navwrap"><nav class="bar" aria-label="Sections">
   <button class="bar-arrow" id="prevM" aria-label="Previous section">←</button>
-  <span class="count" id="count">00 / 06</span><div class="tabs" id="tabs"></div>
+  <span class="count" id="count">00 / 02</span><div class="tabs" id="tabs"></div>
   <button class="bar-arrow" id="nextM" aria-label="Next section">→</button>
 </nav></div>
 
@@ -507,10 +473,6 @@ details ul b{color:var(--ink); font-weight:600;}
   var PANELS = [
     {id:'p-intro', hash:'intro', label:'Intro'},
     {id:'p-session', hash:'session', label:'Session'},
-    {id:'p-maze', hash:'maze', label:'Maze'},
-    {id:'p-bot', hash:'bot', label:'Bot'},
-    {id:'p-pro', hash:'pro', label:'PRO'},
-    {id:'p-apply', hash:'apply', label:'Apply'},
     {id:'p-checks', hash:'checks', label:'Checks'}
   ];
   var deck = document.getElementById('deck');
@@ -578,7 +540,7 @@ details ul b{color:var(--ink); font-weight:600;}
     else if (e.key === 'ArrowLeft' || e.key === 'PageUp'){ e.preventDefault(); step(-1); }
     else if (e.key === 'Home'){ e.preventDefault(); goTo(0, true); }
     else if (e.key === 'End'){ e.preventDefault(); goTo(panels.length - 1, true); }
-    else if (e.key.length === 1 && e.key >= '1' && e.key <= '6'){ goTo(+e.key, true); }
+    else if (e.key.length === 1 && e.key >= '1' && e.key <= '2'){ goTo(+e.key, true); }
     else if (e.key === '0'){ goTo(0, true); }
   });
   var wheelLock = false;
@@ -600,14 +562,14 @@ details ul b{color:var(--ink); font-weight:600;}
   /* ================= 01 session timeline ================= */
   var SEGS = [
     {ph:'discover', p:'Discover', q:'quick', m:4, w:11, sn:'Temp check', n:'Temperature check', f:'Whole room, then groups', what:'Before the Maze, a quick temperature check on how the room feels about AI. People discuss their opinions of AI in groups, then with me.'},
-    {ph:'discover', p:'Discover', m:15, n:'The Maze', f:'Floor game · 4 teams', what:'Teams cross a puzzle-mat grid one step at a time. I can only say “correct” or “incorrect”, and a wrong step passes the turn to the next team.', ask:'“How did you find the challenge?”', slide:'AI doesn’t understand things the way we do. It learns patterns from huge numbers of examples, then predicts what’s most likely to come next.', go:'maze'},
-    {ph:'discover', p:'Discover', m:10, n:'Build the Bot', f:'Timed challenge · 4 teams', what:'Four teams build the same magnetic-tile bot in 3 minutes from different information: told verbally only, the image for 30 seconds, a written prompt, or the prompt and the image.', ask:'“What tools did you have? What made it easier or harder?”', slide:'Your Input = The Output. Better prompts = better answers.', go:'bot'},
-    {ph:'name', p:'Name it', m:10, n:'PRO Deck', f:'Card game · 4 teams', what:'Teams piece together the PRO sentence cards. The first team to finish wins.', ask:'“What pattern can you see? What does it spell?”', slide:'The PRO framework: Persona, Role, Output.', go:'pro'},
-    {ph:'practise', p:'Practise', m:10, n:'Prompt Builder', f:'Worksheet · 4 teams', what:'Teams build their own prompt from the examples while I walk the room. Volunteers read theirs out.', slide:'You don’t just tell AI what to do — you guide how it does it.', go:'pro'},
-    {ph:'practise', p:'Practise', m:5, n:'Break', f:'Individuals', what:'Everyone writes down a business idea they’ve never pursued, and downloads ChatGPT.', ask:'“What’s a business idea you’ve always had but never pursued?”', go:'apply'},
+    {ph:'discover', p:'Discover', m:15, n:'The Maze', f:'Floor game · 4 teams', what:'Puzzle mats on the floor become a grid with one hidden path. Teams step through one mat at a time, and I can only say “correct” or “incorrect”. Even though nobody saw the path, through trial and error they were able to find it.', ask:'“How did you find the challenge?”', x:'maze'},
+    {ph:'discover', p:'Discover', m:10, n:'Build the Bot', f:'Timed challenge · 4 teams', what:'Four teams get the same magnetic tiles and three minutes to build this bot, but each team gets different information: told verbally only, the image for 30 seconds, a written prompt, or the prompt and the image. Then we compare the builds, before any prompting has been taught.', ask:'“What tools did you have? What made it easier or harder?”', slide:'Your Input = The Output. Better prompts = better answers.', x:'bot'},
+    {ph:'name', p:'Name it', m:10, n:'PRO Deck', f:'Card game · 4 teams', what:'Teams piece together the PRO sentence cards until someone spots the pattern. The first team to finish wins. Only then does the framework get its name.', ask:'“What pattern can you see? What does it spell?”', slide:'The PRO framework: Persona, Role, Output.', x:'pro'},
+    {ph:'practise', p:'Practise', m:10, n:'Prompt Builder', f:'Worksheet · 4 teams', what:'Teams build their own prompt one letter at a time from the example options while I walk the room. Volunteers read theirs out, and one team’s prompt is used later in the live demo.', slide:'You don’t just tell AI what to do — you guide how it does it.', x:'builder'},
+    {ph:'practise', p:'Practise', m:5, n:'Break', f:'Individuals', what:'Everyone writes down a business idea they’ve never pursued, and downloads ChatGPT.', ask:'“What’s a business idea you’ve always had but never pursued?”', say:'Write it down. Don’t just think it. This could be the first step to building it. We’ll discuss after the break.'},
     {ph:'practise', p:'Practise', m:15, n:'ChatGPT onboarding', f:'Live demo · whole room', what:'How to access ChatGPT and its models and tools. Then a vague prompt against a good PRO prompt written by one of the teams, and a business idea with a volunteer.'},
-    {ph:'apply', p:'Apply', m:20, n:'Prompt & Profit', f:'Worksheet · individuals', what:'Each person works through four prompts in ChatGPT on their own goals while I coach one to one.', go:'apply'},
-    {ph:'apply', p:'Apply', m:4, w:7, q:'end', n:'Close', f:'Whole room', what:'A PRO recap, open questions, my email for follow-up, and the 21-prompt cheat sheet to take home.', ask:'“What’s one thing you learned today?”', slide:'Master AI before it masters you.', go:'checks'}
+    {ph:'apply', p:'Apply', m:20, n:'Prompt & Profit', f:'Worksheet · individuals', what:'The last 20 minutes are individual. Each person works through four prompts in ChatGPT, each building on the one before, while I walk the room coaching one to one.', x:'apply'},
+    {ph:'apply', p:'Apply', m:4, w:7, q:'end', n:'Close', f:'Whole room', what:'A PRO recap, open questions, my email for follow-up, and the 21-prompt cheat sheet to take home.', ask:'“What’s one thing you learned today?”', slide:'Master AI before it masters you.'}
   ];
   var bar = document.getElementById('bar90'), segDetail = document.getElementById('segDetail');
   var segBtns = SEGS.map(function(s, i){
@@ -624,17 +586,25 @@ details ul b{color:var(--ink); font-weight:600;}
   function showSeg(i){
     var s = SEGS[i];
     segBtns.forEach(function(b, k){ b.setAttribute('aria-pressed', k === i ? 'true' : 'false'); });
-    segDetail.className = 'card seg-detail ph-' + s.ph;
+    segDetail.className = 'seg-detail ph-' + s.ph; current_seg = i;
+    document.getElementById('segCard').className = 'card seg-card ph-' + s.ph;
     var h = '<div class="t">' + esc(s.n) + ' <small>' + (s.q ? s.q : s.m ? s.m + ' min planned' : 'end of session') + ' · ' + s.p + '</small></div>' +
             '<span class="k">Format</span><span>' + esc(s.f) + '</span>' +
             '<span class="k">What happens</span><span>' + esc(s.what) + '</span>';
     if (s.ask) h += '<span class="k">Ask</span><span class="quote">' + esc(s.ask) + '</span>';
     if (s.slide) h += '<span class="k">Slide</span><span class="quote">“' + esc(s.slide) + '”</span>';
-    if (s.go) h += '<span></span><span><a href="#' + s.go + '" data-jump="' + s.go + '">See it in detail →</a></span>';
+    if (s.say) h += '<span class="k">Say</span><span>' + esc(s.say) + '</span>';
     segDetail.innerHTML = h;
-    var j = segDetail.querySelector('[data-jump]');
-    if (j) j.addEventListener('click', function(e){ e.preventDefault(); goTo(indexOfHash(s.go), true); });
+    Array.prototype.forEach.call(document.querySelectorAll('.seg-extra'), function(x){ x.hidden = x.getAttribute('data-for') !== s.x; });
+    document.getElementById('segPrev').disabled = i === 0;
+    document.getElementById('segNext').disabled = i === SEGS.length - 1;
   }
+  var current_seg = 0;
+  document.getElementById('segPrev').addEventListener('click', function(){ showSeg(Math.max(0, current_seg - 1)); });
+  document.getElementById('segNext').addEventListener('click', function(){ showSeg(Math.min(SEGS.length - 1, current_seg + 1)); });
+  Array.prototype.forEach.call(document.querySelectorAll('[data-seg]'), function(b){
+    b.addEventListener('click', function(){ showSeg(+b.getAttribute('data-seg')); goTo(indexOfHash('session'), true); });
+  });
   showSeg(0);
 
   /* ================= 02 maze ================= */
