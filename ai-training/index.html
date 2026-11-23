@@ -1,0 +1,757 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Fattima Goffe: an AI training portfolio built from the ProJourno AI Masterclass, for an AI Trainer & Coach role.">
+<title>Fattima Goffe AI Training</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,500&family=Public+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap">
+<style>
+/* Same system as the BDR portfolio (../): a horizontal deck of full-width panels with
+   native scroll-snap paging, side arrows, a section bar, keys and deep links (#maze etc.).
+   Single dark editorial theme: slate ground, serif headlines, mono labels, copper accent.
+   The four session phases each get one colour, used only to mark phase. */
+:root{
+  --bg:#0f1114; --surface:#171a1f; --surface-2:#1f232a; --line:#2c323b;
+  --ink:#f0f2f4; --muted:#a3abb5; --faint:#717a85;
+  --accent:#e2925f; --accent-soft:rgba(226,146,95,.14); --accent-ink:#1b120c;
+  --steel:#93b4dc; --steel-soft:rgba(147,180,220,.14);
+  --ok:#72cc9c; --ok-soft:rgba(114,204,156,.13);
+  --warn:#e8c46a; --warn-soft:rgba(232,196,106,.13);
+  --stop:#ec7c7c; --stop-soft:rgba(236,124,124,.13);
+  --display:"Fraunces", Georgia, "Times New Roman", serif;
+  --body:"Public Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --mono:"JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+  color-scheme: dark;
+}
+html,body{height:100%; margin:0;}
+*{box-sizing:border-box}
+body{background:var(--bg); color:var(--ink); font-family:var(--body); font-size:15px; overscroll-behavior-y:none;
+  display:flex; flex-direction:column;}
+h1,h2,h3{margin:0; text-wrap:balance; font-weight:600;}
+p{margin:0; line-height:1.6;}
+a{color:var(--accent);}
+button{font-family:inherit; cursor:pointer; color:inherit;}
+:focus-visible{outline:2px solid var(--accent); outline-offset:3px; border-radius:6px;}
+img{max-width:100%; display:block;}
+.label{font-family:var(--mono); font-size:11px; letter-spacing:.12em; text-transform:uppercase; color:var(--accent);}
+.muted{color:var(--muted);}
+
+/* ---------- deck ---------- */
+.deck{flex:1 1 auto; min-height:0; display:flex; overflow-x:auto; overflow-y:hidden; scroll-snap-type:x mandatory;
+  overscroll-behavior-x:contain; scrollbar-width:none;}
+.deck::-webkit-scrollbar{display:none;}
+@media (prefers-reduced-motion:no-preference){ .deck{scroll-behavior:smooth;} }
+.panel{flex:0 0 100%; height:100%; overflow-y:auto; scroll-snap-align:start; scroll-snap-stop:always;
+  padding-block:56px 40px;
+  padding-left:max(80px, calc(env(safe-area-inset-left,0px) + 72px));
+  padding-right:max(80px, calc(env(safe-area-inset-right,0px) + 72px));
+  display:flex;}
+.inner{width:100%; max-width:1120px; margin:auto; display:flex; flex-direction:column; gap:22px;}
+@media (max-width:640px){
+  .panel{padding-block:28px 28px;
+    padding-left:max(16px, calc(env(safe-area-inset-left,0px) + 16px));
+    padding-right:max(16px, calc(env(safe-area-inset-right,0px) + 16px));}
+}
+.head{display:flex; flex-direction:column; gap:12px; max-width:760px;}
+.head h2{font-family:var(--display); font-size:clamp(28px,4.2vw,50px); line-height:1.08; letter-spacing:-.01em;}
+.head h2.long{font-size:clamp(26px,3.3vw,40px);}
+.lede{color:var(--muted); font-size:16.5px; max-width:64ch;}
+.split{display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1fr); gap:28px; align-items:start;}
+.split.wide-right{grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr);}
+.split.wide-left{grid-template-columns:minmax(0,1.2fr) minmax(0,.8fr);}
+@media (max-width:900px){ .split, .split.wide-right, .split.wide-left{grid-template-columns:minmax(0,1fr);} }
+.card{background:var(--surface); border:1px solid var(--line); border-radius:14px; padding:20px;}
+.stack{display:flex; flex-direction:column; gap:14px;}
+.lesson{display:flex; flex-direction:column; gap:8px; max-width:680px;}
+.lesson .q{font-family:var(--display); font-style:italic; font-weight:500; font-size:clamp(19px,2.1vw,24px); line-height:1.35;}
+.facts{display:flex; flex-wrap:wrap; gap:8px;}
+.facts span{font-family:var(--mono); font-size:12px; color:var(--muted); border:1px solid var(--line); border-radius:999px; padding:5px 11px;}
+.sim{font-family:var(--mono); font-size:11px; color:var(--faint);}
+.foot{font-family:var(--mono); font-size:11.5px; color:var(--faint); line-height:1.6;}
+.k{font-family:var(--mono); font-size:10.5px; color:var(--faint); text-transform:uppercase; letter-spacing:.06em;}
+.quote{font-family:var(--display); font-style:italic;}
+details{border-top:1px solid var(--line); padding-top:4px;}
+summary{cursor:pointer; list-style:none; font-family:var(--mono); font-size:12.5px; color:var(--accent); padding:10px 0;}
+summary::-webkit-details-marker{display:none;}
+summary::before{content:"+ ";} details[open] summary::before{content:"− ";}
+details .body{padding-bottom:10px; color:var(--muted); font-size:14px; display:flex; flex-direction:column; gap:8px;}
+details ul{margin:0; padding-left:18px; display:flex; flex-direction:column; gap:6px;}
+details ul b{color:var(--ink); font-weight:600;}
+
+/* ---------- cover ---------- */
+.cover-grid{display:grid; grid-template-columns:minmax(0,1.35fr) minmax(0,.65fr); gap:36px; align-items:center;}
+@media (max-width:900px){ .cover-grid{grid-template-columns:minmax(0,1fr);} .cover-photo{max-width:340px;} }
+.cover{display:flex; flex-direction:column; gap:20px;}
+.cover h1{font-family:var(--display); font-size:clamp(40px,7vw,80px); line-height:1; letter-spacing:-.02em; font-weight:600;}
+.cover .role{font-family:var(--mono); font-size:13px; color:var(--accent); letter-spacing:.04em;}
+.cover .intro{font-size:clamp(17px,1.8vw,20px); line-height:1.55; max-width:56ch;}
+.cover .bg{color:var(--muted); max-width:60ch;}
+.cover-photo{margin:0; display:flex; flex-direction:column; gap:8px;}
+.cover-photo img{border-radius:14px; border:1px solid var(--line); aspect-ratio:3/4; object-fit:cover; object-position:18% 50%; width:100%; height:auto;}
+@media (max-width:900px){ .cover-photo img{aspect-ratio:4/3; object-position:20% 35%;} }
+.cover-photo figcaption{font-family:var(--mono); font-size:11px; color:var(--faint); line-height:1.5;}
+.proofs{display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:12px;}
+@media (max-width:640px){ .proofs{grid-template-columns:minmax(0,1fr);} }
+.proof{text-align:left; background:var(--surface); border:1px solid var(--line); border-radius:14px; padding:16px;
+  display:flex; flex-direction:column; gap:8px; min-height:118px;}
+.proof:hover{border-color:var(--accent);}
+.proof .n{font-family:var(--mono); font-size:11px; color:var(--faint);}
+.proof .t{font-weight:600; font-size:15px; line-height:1.35;}
+.proof .f{font-family:var(--mono); font-size:11.5px; color:var(--muted); margin-top:auto;}
+.hint{font-family:var(--mono); font-size:12px; color:var(--faint);}
+
+/* ---------- session timeline ---------- */
+.ph-discover{--ph:var(--accent); --ph-soft:var(--accent-soft);}
+.ph-name{--ph:var(--steel); --ph-soft:var(--steel-soft);}
+.ph-practise{--ph:var(--ok); --ph-soft:var(--ok-soft);}
+.ph-apply{--ph:var(--warn); --ph-soft:var(--warn-soft);}
+.bar90{display:flex; gap:4px; list-style:none; margin:0; padding:0;}
+.bar90 li{min-width:0;}
+.seg{width:100%; height:64px; background:var(--ph-soft); border:1px solid transparent; border-top:3px solid var(--ph); border-radius:8px;
+  padding:7px 8px; display:flex; flex-direction:column; justify-content:space-between; text-align:left; overflow:hidden;}
+.seg .nm{font-size:12.5px; font-weight:600; line-height:1.2; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;}
+.seg .mn{font-family:var(--mono); font-size:10.5px; color:var(--muted);}
+.seg[aria-pressed="true"]{border-color:var(--ph); border-top-width:3px;}
+.phases{display:flex; flex-wrap:wrap; gap:14px; font-family:var(--mono); font-size:11px; color:var(--muted);}
+.phases span{display:inline-flex; align-items:center; gap:6px;}
+.phases i{width:10px; height:10px; border-radius:3px; background:var(--ph);}
+@media (max-width:720px){
+  .bar90{flex-direction:column;}
+  .bar90 li{flex:none !important;}
+  .seg{height:auto; flex-direction:row; align-items:center; gap:10px; border-top-width:1px; border-left:3px solid var(--ph);}
+  .seg[aria-pressed="true"]{border-top-width:1px;}
+}
+.seg-detail{display:grid; grid-template-columns:110px minmax(0,1fr); gap:10px 16px; font-size:14.5px; min-height:150px; align-content:start;}
+.seg-detail .k{padding-top:3px;}
+.seg-detail .t{font-family:var(--display); font-size:22px; grid-column:1/-1; display:flex; align-items:baseline; gap:12px; flex-wrap:wrap;}
+.seg-detail .t small{font-family:var(--mono); font-size:11.5px; color:var(--ph);}
+@media (max-width:520px){ .seg-detail{grid-template-columns:minmax(0,1fr); gap:2px;} .seg-detail .k{padding-top:10px;} }
+
+/* ---------- maze ---------- */
+.maze-wrap{display:flex; flex-direction:column; gap:12px; align-items:center;}
+.maze-end{font-family:var(--mono); font-size:11px; color:var(--faint); letter-spacing:.08em;}
+.maze{display:grid; grid-template-columns:repeat(4, 1fr); gap:6px; width:min(100%, 330px);}
+.mat{aspect-ratio:1; border-radius:6px; border:1px solid rgba(255,255,255,.06); position:relative; font-size:20px; font-weight:700;
+  display:flex; align-items:center; justify-content:center; color:var(--bg);}
+.mat.c0{background:#3e5f8f;} .mat.c1{background:#8c7a33;} .mat.c2{background:#3f7a57;} .mat.c3{background:#8a4f62;}
+.mat:hover{filter:brightness(1.15);}
+.mat.good{background:var(--ok); }
+.mat.good::after{content:"✓";}
+.mat.here{outline:3px solid var(--ink); outline-offset:2px;}
+.mat.bad{background:var(--surface-2); color:var(--stop); border-color:rgba(236,124,124,.5);}
+.mat.bad::after{content:"✕";}
+.maze-msg{font-size:14.5px; min-height:48px; text-align:center; max-width:42ch;}
+.maze-msg b{color:var(--ink);}
+.maze-msg.good b{color:var(--ok);} .maze-msg.bad b{color:var(--stop);}
+.small-btn{font-family:var(--mono); font-size:12px; background:transparent; border:1px solid var(--line); border-radius:999px; padding:7px 13px;}
+.small-btn:hover{border-color:var(--accent); color:var(--accent);}
+.reveal{border-left:3px solid var(--accent); padding:4px 0 4px 14px;}
+.reveal[hidden]{display:none;}
+.photo-card{margin:0; display:flex; flex-direction:column; gap:8px;}
+.photo-card img{border-radius:12px; border:1px solid var(--line); width:100%; height:auto; aspect-ratio:16/9; object-fit:cover; object-position:40% 82%;}
+.photo-card figcaption{font-family:var(--mono); font-size:11px; color:var(--faint);}
+.rules{display:grid; grid-template-columns:90px minmax(0,1fr); gap:8px 14px; font-size:14px;}
+.rules .k{padding-top:3px;}
+@media (max-width:520px){ .rules{grid-template-columns:minmax(0,1fr); gap:2px;} .rules .k{padding-top:10px;} }
+
+/* ---------- build the bot ---------- */
+.picker{display:flex; flex-wrap:wrap; gap:8px;}
+.pick{font-family:var(--mono); font-size:12.5px; background:var(--surface-2); border:1px solid var(--line); border-radius:999px; padding:9px 14px;}
+.pick[aria-pressed="true"]{border-color:var(--accent); color:var(--accent);}
+.inputs{display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:10px;}
+.rf{background:var(--surface-2); border-radius:10px; padding:12px 14px;}
+.rf .v{font-size:15px; font-weight:600; margin-top:4px; line-height:1.35;}
+.v.on{color:var(--ok);} .v.part{color:var(--warn);} .v.off{color:var(--faint);}
+.like{font-family:var(--display); font-style:italic; font-size:clamp(18px,1.9vw,21px); line-height:1.4;}
+.bot-fig{margin:0; background:#f3f2ee; border:1px solid var(--line); border-radius:14px;
+  padding:18px; display:flex; flex-direction:column; align-items:center; gap:10px;}
+.bot-fig img{max-height:300px; width:auto; height:auto; mix-blend-mode:multiply;}
+.bot-fig figcaption{font-family:var(--mono); font-size:11px; color:#5a606a; text-align:center;}
+.prompt-text{font-size:14px; color:var(--muted); line-height:1.6;}
+.prompt-text p{margin-bottom:6px;}
+
+/* ---------- PRO builder ---------- */
+.pro-defs{display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:10px;}
+@media (max-width:640px){ .pro-defs{grid-template-columns:minmax(0,1fr);} }
+.pro-def{background:var(--surface); border:1px solid var(--line); border-radius:12px; padding:14px; display:flex; flex-direction:column; gap:4px;}
+.pro-def .L{font-family:var(--display); font-size:30px; line-height:1; color:var(--pc);}
+.pro-def .w{font-weight:600;}
+.pro-def p{font-size:13.5px; color:var(--muted);}
+.cp{--pc:var(--accent);} .cr{--pc:var(--steel);} .co{--pc:var(--ok);}
+.opt-group{display:flex; flex-direction:column; gap:8px;}
+.opt-group .k{color:var(--pc);}
+.opts{display:flex; flex-wrap:wrap; gap:6px;}
+.opt{font-size:13px; background:var(--surface-2); border:1px solid var(--line); border-radius:999px; padding:7px 12px;}
+.opt[aria-pressed="true"]{border-color:var(--pc); color:var(--pc); background:color-mix(in srgb, var(--pc) 12%, transparent);}
+.assembled{background:var(--surface-2); border-radius:12px; padding:16px 18px; font-size:clamp(16px,1.6vw,18px); line-height:1.6;}
+.assembled span{border-bottom:2px solid var(--pc); color:var(--ink); font-weight:600;}
+.taught{counter-reset:t; list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:10px;}
+.taught li{display:grid; grid-template-columns:28px minmax(0,1fr); gap:10px; font-size:14px; color:var(--muted);}
+.taught li::before{counter-increment:t; content:counter(t); font-family:var(--mono); font-size:11px; color:var(--accent);
+  border:1px solid var(--line); border-radius:50%; width:24px; height:24px; display:flex; align-items:center; justify-content:center;}
+.taught b{color:var(--ink); font-weight:600;}
+
+/* ---------- apply ---------- */
+.ptabs{display:flex; gap:6px; flex-wrap:wrap;}
+.ptab{font-family:var(--mono); font-size:12px; background:var(--surface-2); border:1px solid var(--line); border-radius:999px; padding:8px 13px;}
+.ptab[aria-pressed="true"]{border-color:var(--warn); color:var(--warn);}
+.pcard{display:flex; flex-direction:column; gap:12px; min-height:230px;}
+.pcard h3{font-family:var(--display); font-size:24px;}
+.pcard .goal{color:var(--muted); font-size:14.5px;}
+.pcard .pt{background:var(--surface-2); border-radius:10px; padding:14px 16px; font-size:14.5px; line-height:1.6;}
+.pcard .builds{font-family:var(--mono); font-size:11.5px; color:var(--faint);}
+.break-card{border:1px dashed var(--faint); border-radius:14px; padding:18px; display:flex; flex-direction:column; gap:10px;}
+.break-card .q2{font-family:var(--display); font-style:italic; font-size:clamp(19px,2vw,23px); line-height:1.35;}
+
+/* ---------- checks ---------- */
+.checklist{list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:10px;}
+.checklist li{display:grid; grid-template-columns:118px minmax(0,1fr); gap:12px; font-size:14px; color:var(--muted); border-bottom:1px solid var(--line); padding-bottom:10px;}
+.checklist li:last-child{border-bottom:0; padding-bottom:0;}
+.checklist .when{font-family:var(--mono); font-size:11px; color:var(--ink); padding-top:2px;}
+@media (max-width:520px){ .checklist li{grid-template-columns:minmax(0,1fr); gap:2px;} }
+.future{border:1px dashed rgba(232,196,106,.55); background:var(--warn-soft); border-radius:14px; padding:20px;}
+.future .label{color:var(--warn);}
+.future ul{margin:12px 0 0; padding-left:18px; display:flex; flex-direction:column; gap:9px; font-size:14px; color:var(--muted);}
+.future b{color:var(--ink); font-weight:600;}
+.repos{display:flex; flex-wrap:wrap; gap:10px;}
+.repo{display:inline-flex; align-items:center; gap:8px; font-family:var(--mono); font-size:12.5px; color:var(--ink);
+  text-decoration:none; border:1px solid var(--line); border-radius:999px; padding:8px 14px;}
+.repo:hover{border-color:var(--accent); color:var(--accent);}
+.repo span{color:var(--accent);}
+
+/* ---------- navigation ---------- */
+.side-arrow{position:fixed; top:50%; transform:translateY(-50%); z-index:20; width:50px; height:50px; border-radius:50%;
+  background:var(--surface); border:1px solid var(--line); font-size:20px; display:flex; align-items:center; justify-content:center;}
+.side-arrow.left{left:max(14px, env(safe-area-inset-left,0px));}
+.side-arrow.right{right:max(14px, env(safe-area-inset-right,0px));}
+.side-arrow:hover:not(:disabled){border-color:var(--accent); color:var(--accent);}
+.side-arrow:disabled{opacity:.18; cursor:default;}
+.navwrap{flex:none; display:flex; justify-content:center; background:var(--bg);
+  padding:8px max(12px, env(safe-area-inset-right,0px)) max(10px, env(safe-area-inset-bottom,0px)) max(12px, env(safe-area-inset-left,0px));}
+.bar{display:flex; align-items:center; gap:10px; background:rgba(23,26,31,.94); border:1px solid var(--line); border-radius:999px;
+  padding:5px 6px 5px 14px; max-width:100%;}
+.bar-arrow{display:none; width:44px; height:44px; flex-shrink:0; border-radius:50%; background:var(--surface-2);
+  border:1px solid var(--line); font-size:17px; align-items:center; justify-content:center;}
+.bar-arrow:disabled{opacity:.25; cursor:default;}
+@media (max-width:640px){
+  .side-arrow{display:none;}
+  .bar-arrow{display:flex;}
+  .bar{width:100%; justify-content:space-between; padding:5px;}
+}
+.count{font-family:var(--mono); font-size:11px; color:var(--faint); white-space:nowrap;}
+.tabs{display:flex; gap:2px;}
+.tab{font-family:var(--mono); font-size:11px; color:var(--muted); background:transparent; border:none; padding:7px 10px; border-radius:999px; white-space:nowrap;}
+.tab[aria-current="true"]{background:var(--accent); color:var(--accent-ink); font-weight:600;}
+@media (max-width:860px){
+  .tab{font-size:0; width:22px; height:22px; padding:0; position:relative;}
+  .tab::before{content:""; position:absolute; inset:7px; border-radius:50%; background:var(--line);}
+  .tab[aria-current="true"]{background:transparent;}
+  .tab[aria-current="true"]::before{background:var(--accent);}
+}
+@media (prefers-reduced-motion:no-preference){
+  .seg,.mat,.pick,.opt,.ptab,.tab,.proof{transition:border-color .2s, background-color .2s, color .2s;}
+}
+</style>
+</head>
+<body>
+<div class="deck" id="deck">
+
+  <!-- ===================== COVER ===================== -->
+  <section class="panel" id="p-intro" aria-label="Introduction">
+    <div class="inner">
+      <div class="cover-grid">
+        <div class="cover">
+          <span class="label">AI Trainer &amp; Coach · The Coders Guild</span>
+          <h1 tabindex="-1">Fattima Goffe</h1>
+          <div class="role">AI automation consultant &amp; trainer</div>
+          <p class="intro">In May 2025 I designed and delivered an AI masterclass for 50+ professionals in Tanzania, most of them new to generative AI. I built it around games before slides, so every idea is discovered before it’s named.</p>
+          <p class="bg">Before AI: counselling, mentoring and group facilitation with young people in Panama, Malta and London.</p>
+        </div>
+        <figure class="cover-photo">
+          <img src="img/maze-mats.jpg" alt="Fattima presenting at the ProJourno Masterclass, with the puzzle-mat maze on the floor and the title slide “AI is here: Are you in or out?” behind her." width="900" height="1200">
+          <figcaption>ProJourno Masterclass, Tanzania, 30 May 2025. The puzzle mats on the floor are the Maze.</figcaption>
+        </figure>
+      </div>
+      <div class="proofs">
+        <button class="proof" data-go="maze"><span class="n">01 · Discover</span><span class="t">Two games that show how AI responds</span><span class="f">The Maze · Build the Bot</span></button>
+        <button class="proof" data-go="pro"><span class="n">02 · Name it</span><span class="t">A framework learners find for themselves</span><span class="f">PRO: Persona, Role, Output</span></button>
+        <button class="proof" data-go="apply"><span class="n">03 · Apply</span><span class="t">From team practice to their own goals</span><span class="f">Prompt Builder · Prompt &amp; Profit</span></button>
+      </div>
+      <div class="hint">Swipe, use ← →, or jump to any section · try the maze and the prompt builder · about three minutes end to end</div>
+    </div>
+  </section>
+
+  <!-- ===================== 01 SESSION ===================== -->
+  <section class="panel" id="p-session" aria-label="01 The session">
+    <div class="inner">
+      <div class="head">
+        <span class="label">01 · The session</span>
+        <h2 tabindex="-1">Two hours, built around doing.</h2>
+        <p class="lede">Beginners are often shown which buttons to press without learning why AI responds the way it does. My aim was for the room to understand how AI responds to information and instructions, and to leave confident they could work out their own prompts.</p>
+      </div>
+      <div class="facts"><span>ProJourno Masterclass Series</span><span>Tanzania · 30 May 2025</span><span>2:00–4:00 pm · planned as 90 min, ran over</span><span>50+ professionals</span><span>Mostly new to generative AI</span><span>Designed and facilitated on my own</span></div>
+      <div class="phases" aria-hidden="true"><span class="ph-discover"><i></i>Discover</span><span class="ph-name"><i></i>Name it</span><span class="ph-practise"><i></i>Practise</span><span class="ph-apply"><i></i>Apply</span></div>
+      <ol class="bar90" id="bar90" aria-label="Session timeline: select an activity"></ol>
+      <div class="card seg-detail" id="segDetail" aria-live="polite"></div>
+      <details>
+        <summary>Decisions I made as a facilitator</summary>
+        <div class="body"><ul>
+          <li><b>Each idea appears on a slide only after the activity that teaches it</b>, so the slide names something the room has just done.</li>
+          <li><b>In the Maze I could only say “correct” or “incorrect”.</b> Teams had to work the path out themselves, which is the point the session builds on.</li>
+          <li><b>Teams first, then individuals.</b> People practise PRO together before using it alone on their own goals.</li>
+          <li><b>The break had a job.</b> Everyone wrote down a business idea they had never pursued, ready to explore with ChatGPT afterwards.</li>
+          <li><b>The live demo used a team’s own prompt</b>, so the improvement on screen came from the room’s work.</li>
+          <li><b>Built to flex.</b> Each team game could switch to volunteers if the space or numbers changed, and each activity had its own music track to mark the change.</li>
+        </ul></div>
+      </details>
+    </div>
+  </section>
+
+  <!-- ===================== 02 MAZE ===================== -->
+  <section class="panel" id="p-maze" aria-label="02 The Maze">
+    <div class="inner">
+      <div class="head">
+        <span class="label">02 · Discover · The Maze</span>
+        <h2 tabindex="-1">You don’t need the map to find the path.</h2>
+        <p class="lede">Puzzle mats on the floor become a grid with one hidden path. Teams step through one mat at a time, and I can only say “correct” or “incorrect”. Nobody sees the path, yet the room finds it.</p>
+      </div>
+      <div class="split">
+        <div class="card maze-wrap">
+          <span class="sim">Try a small version · find the hidden path from the bottom row to the top</span>
+          <span class="maze-end">↑ EXIT</span>
+          <div class="maze" id="mazeGrid" role="grid" aria-label="Puzzle-mat maze, 4 by 4"></div>
+          <span class="maze-end">START ↑ (pick a mat on the bottom row)</span>
+          <p class="maze-msg" id="mazeMsg" aria-live="polite">Pick a mat on the bottom row to step on.</p>
+          <button class="small-btn" id="mazeReset">Reset the maze</button>
+        </div>
+        <div class="stack">
+          <div class="card rules">
+            <span class="k">Teams</span><span>Four, taking turns</span>
+            <span class="k">Rules</span><span>No diagonal steps. I only answer “correct” or “incorrect”. A wrong step and the next team starts. The first team to get three members out wins.</span>
+            <span class="k">Ask</span><span class="quote">“How did you find the challenge?”</span>
+            <span class="k">Land</span><span>Even though you didn’t know the path, you figured it out.</span>
+          </div>
+          <div class="reveal" id="mazeReveal" hidden>
+            <span class="label">Then the slide</span>
+            <p class="quote" style="font-size:18px; margin-top:6px;">“AI doesn’t understand things the way we do. It learns patterns from huge numbers of examples, then predicts what’s most likely to come next.”</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== 03 BUILD THE BOT ===================== -->
+  <section class="panel" id="p-bot" aria-label="03 Build the Bot">
+    <div class="inner">
+      <div class="head">
+        <span class="label">03 · Discover · Build the Bot</span>
+        <h2 tabindex="-1">Same bot. Four different briefs.</h2>
+        <p class="lede">Four teams get the same magnetic tiles and three minutes to build this bot, but each team gets different information. Then we compare the builds, before any prompting has been taught.</p>
+      </div>
+      <div class="split wide-left">
+        <div class="card stack">
+          <span class="sim">Pick a team to see what they had to work from</span>
+          <div class="picker" id="teamPicker" aria-label="Teams"></div>
+          <div class="inputs" id="teamInputs" aria-live="polite"></div>
+          <div><span class="k">Like asking AI…</span><p class="like" id="teamLike" style="margin-top:6px;"></p></div>
+          <details>
+            <summary>Read the written prompt</summary>
+            <div class="body prompt-text">
+              <p><b style="color:var(--ink)">Text Prompt: Build a geometric shape</b></p>
+              <p>Start with a cube made from 6 blank square faces — like a cardboard box. On each of the 4 vertical sides (not top or bottom), place two flat square shapes. Arrange the two squares on each face so they are angled inward diagonally, with their points facing toward the centre of the cube’s face (like two triangles touching tips). Repeat this exact square arrangement on the remaining three vertical sides of the cube. Do not place any shapes on the top or bottom of the cube.</p>
+            </div>
+          </details>
+        </div>
+        <div class="stack">
+          <figure class="bot-fig">
+            <img src="img/bot.png" alt="The target bot: a cube built from magnetic tiles, with two squares angled out from each side." width="480" height="640" loading="lazy">
+            <figcaption>The bot every team was aiming for</figcaption>
+          </figure>
+          <div class="card rules">
+            <span class="k">Ask</span><span class="quote">“What tools did you have? What made it easier or harder?”</span>
+          </div>
+        </div>
+      </div>
+      <div class="lesson"><span class="label">On the slide</span><p class="q">“Your Input = The Output.” “Better prompts = better answers.”</p></div>
+    </div>
+  </section>
+
+  <!-- ===================== 04 PRO ===================== -->
+  <section class="panel" id="p-pro" aria-label="04 The PRO framework">
+    <div class="inner">
+      <div class="head">
+        <span class="label">04 · Name it · PRO</span>
+        <h2 tabindex="-1">A framework they find for themselves.</h2>
+        <p class="lede">Teams piece together PRO sentence cards until someone spots the pattern. Only then does the framework get its name.</p>
+      </div>
+      <div class="pro-defs">
+        <div class="pro-def cp"><span class="L">P</span><span class="w">Persona</span><p>Who the AI should be. “You are a…”</p></div>
+        <div class="pro-def cr"><span class="L">R</span><span class="w">Role</span><p>Who the AI is helping, and their situation. “Act like you’re helping someone who is…”</p></div>
+        <div class="pro-def co"><span class="L">O</span><span class="w">Output</span><p>How the answer should be explained or set out. “Explain it…”</p></div>
+      </div>
+      <div class="split wide-right">
+        <div class="stack">
+          <span class="label">How I taught it</span>
+          <ol class="taught">
+            <li><span><b>PRO Deck (10 min, teams).</b> Teams assemble the sentence cards. “What pattern can you see? What does it spell?”</span></li>
+            <li><span><b>Prompt Builder (10 min, teams).</b> One letter at a time, with example options for each, then the full prompt.</span></li>
+            <li><span><b>Read it out.</b> Volunteers share their prompts while I walk the room.</span></li>
+            <li><span><b>See it live.</b> One team’s prompt goes into ChatGPT next to a vague one.</span></li>
+          </ol>
+          <div class="lesson"><span class="label">On the slide</span><p class="q">“You don’t just tell AI what to do — you guide how it does it.”</p></div>
+        </div>
+        <div class="card stack">
+          <span class="sim">Try the Prompt Builder · options from the original worksheet</span>
+          <div class="opt-group cp"><span class="k">P · Persona: You are a…</span><div class="opts" data-slot="p"></div></div>
+          <div class="opt-group cr"><span class="k">R · Role: Act like you’re helping someone who is…</span><div class="opts" data-slot="r"></div></div>
+          <div class="opt-group co"><span class="k">O · Output: Explain it…</span><div class="opts" data-slot="o"></div></div>
+          <p class="assembled" id="assembled" aria-live="polite"></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== 05 APPLY ===================== -->
+  <section class="panel" id="p-apply" aria-label="05 Apply">
+    <div class="inner">
+      <div class="head">
+        <span class="label">05 · Apply · Prompt &amp; Profit</span>
+        <h2 class="long" tabindex="-1">From team practice to their own goals.</h2>
+        <p class="lede">The last 20 minutes are individual. Each person works through four prompts in ChatGPT, each building on the one before, while I walk the room coaching one to one.</p>
+      </div>
+      <div class="split wide-right">
+        <div class="break-card">
+          <span class="label">Set up at the break</span>
+          <p class="q2">“What’s a business idea you’ve always had but never pursued?”</p>
+          <p class="muted" style="font-size:14px;">Write it down. Don’t just think it. This could be the first step to building it. We’ll discuss after the break.</p>
+        </div>
+        <div class="card stack">
+          <div class="ptabs" id="ptabs" aria-label="The four prompts"></div>
+          <div class="pcard" id="pcard" aria-live="polite"></div>
+        </div>
+      </div>
+      <p class="foot">Prompts 3 and 4 have been reworded since the session so nothing reads as a promise of income: learners are asked to test ideas and be realistic about the effort.</p>
+    </div>
+  </section>
+
+  <!-- ===================== 06 CHECKS + MATERIALS ===================== -->
+  <section class="panel" id="p-checks" aria-label="06 Checking understanding and materials">
+    <div class="inner">
+      <div class="head">
+        <span class="label">06 · Checking it landed</span>
+        <h2 tabindex="-1">Every activity ends with a question.</h2>
+      </div>
+      <div class="split">
+        <div class="card">
+          <span class="label" style="display:block; margin-bottom:14px;">As delivered</span>
+          <ul class="checklist">
+            <li><span class="when">Before the Maze</span><span>A quick temperature check, then groups discuss their opinions of AI, with each other and with me. Where is the room starting from?</span></li>
+            <li><span class="when">The Maze</span><span>“How did you find the challenge?” Did teams notice feedback alone got them through?</span></li>
+            <li><span class="when">Build the Bot</span><span>“What tools did you have? What made it easier or harder?” Do they link the result to the brief?</span></li>
+            <li><span class="when">PRO Deck</span><span>“What pattern can you see?” Can they spot the structure before it’s named?</span></li>
+            <li><span class="when">Prompt Builder</span><span>Volunteers read prompts aloud while I walk the room.</span></li>
+            <li><span class="when">Live demo</span><span>A team’s prompt against a vague one, using their own work.</span></li>
+            <li><span class="when">Prompt &amp; Profit</span><span>One-to-one coaching as each person works in ChatGPT.</span></li>
+            <li><span class="when">Close</span><span>“What’s one thing you learned today?”</span></li>
+          </ul>
+        </div>
+        <div class="stack">
+          <div class="future">
+            <span class="label">What I’d add next time · not part of the original session</span>
+            <ul>
+              <li><b>Before-and-after prompt.</b> Write a prompt for your business idea at the start, rewrite it with PRO at the end and compare the answers.</li>
+              <li><b>Spot the missing letter.</b> Show three short prompts and ask which part of PRO each is missing.</li>
+              <li><b>Pair check.</b> Swap prompts and check each other’s against P, R and O.</li>
+              <li><b>Confidence check.</b> Hands up from 1 to 5, at the start and the end.</li>
+              <li><b>Exit card.</b> One thing learned and one open question, to shape follow-up.</li>
+            </ul>
+          </div>
+          <div class="stack" style="gap:10px;">
+            <span class="label">The materials</span>
+            <div class="repos">
+              <a class="repo" href="pdf/Fattima_Goffe_AI_Training_Portfolio.pdf" target="_blank" rel="noopener"><span>↓</span> Full portfolio (PDF)</a>
+              <a class="repo" href="pdf/A_Facilitator_Run_Sheet.pdf" target="_blank" rel="noopener"><span>↓</span> Run sheet</a>
+              <a class="repo" href="pdf/B_Build_the_Bot.pdf" target="_blank" rel="noopener"><span>↓</span> Build the Bot</a>
+              <a class="repo" href="pdf/C_PRO_Framework_and_Prompt_Builder.pdf" target="_blank" rel="noopener"><span>↓</span> PRO + Prompt Builder</a>
+              <a class="repo" href="pdf/D_Prompt_and_Profit_Worksheet.pdf" target="_blank" rel="noopener"><span>↓</span> Prompt &amp; Profit</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <p class="foot">The original session materials, lightly edited for this portfolio. I used a Custom GPT I had built to brainstorm and structure the session. I delivered it as Fattima Mahdi; I have since married.</p>
+    </div>
+  </section>
+</div>
+
+<button class="side-arrow left" id="prev" aria-label="Previous section">←</button>
+<button class="side-arrow right" id="next" aria-label="Next section">→</button>
+<div class="navwrap"><nav class="bar" aria-label="Sections">
+  <button class="bar-arrow" id="prevM" aria-label="Previous section">←</button>
+  <span class="count" id="count">00 / 06</span><div class="tabs" id="tabs"></div>
+  <button class="bar-arrow" id="nextM" aria-label="Next section">→</button>
+</nav></div>
+
+<script>
+(function(){
+  var reduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* ================= navigation (same as the BDR portfolio) ================= */
+  var PANELS = [
+    {id:'p-intro', hash:'intro', label:'Intro'},
+    {id:'p-session', hash:'session', label:'Session'},
+    {id:'p-maze', hash:'maze', label:'Maze'},
+    {id:'p-bot', hash:'bot', label:'Bot'},
+    {id:'p-pro', hash:'pro', label:'PRO'},
+    {id:'p-apply', hash:'apply', label:'Apply'},
+    {id:'p-checks', hash:'checks', label:'Checks'}
+  ];
+  var deck = document.getElementById('deck');
+  var panels = PANELS.map(function(p){ return document.getElementById(p.id); });
+  var prevBtn = document.getElementById('prev'), nextBtn = document.getElementById('next');
+  var prevM = document.getElementById('prevM'), nextM = document.getElementById('nextM');
+  var countEl = document.getElementById('count'), tabsEl = document.getElementById('tabs');
+  var active = -1, pending = null, settle = null, focusOnSettle = false;
+
+  function indexOfHash(h){ h = (h || '').replace('#',''); for (var i=0;i<PANELS.length;i++){ if (PANELS[i].hash === h) return i; } return -1; }
+  function current(){ return Math.round(deck.scrollLeft / deck.clientWidth); }
+  function pad(n){ return (n < 10 ? '0' : '') + n; }
+
+  var tabs = PANELS.map(function(p, i){
+    var b = document.createElement('button');
+    b.className = 'tab'; b.textContent = p.label;
+    b.setAttribute('aria-label', (i ? pad(i) + ' ' : '') + p.label);
+    b.addEventListener('click', function(){ goTo(i, true); });
+    tabsEl.appendChild(b);
+    return b;
+  });
+
+  function goTo(i, withFocus){
+    i = Math.max(0, Math.min(panels.length - 1, i));
+    pending = i; focusOnSettle = !!withFocus;
+    if (i === current()){ sync(); settled(); return; }
+    deck.scrollTo({left: i * deck.clientWidth, behavior: reduced ? 'auto' : 'smooth'});
+    clearTimeout(settle);
+    settle = setTimeout(function(){ sync(); settled(); }, reduced ? 30 : 650);
+  }
+  function step(d){ goTo((pending !== null ? pending : current()) + d, true); }
+
+  function sync(){
+    var i = current();
+    if (i === active) return;
+    active = i;
+    tabs.forEach(function(t, k){ if (k === i) t.setAttribute('aria-current','true'); else t.removeAttribute('aria-current'); });
+    prevBtn.disabled = prevM.disabled = i === 0; nextBtn.disabled = nextM.disabled = i === panels.length - 1;
+    countEl.textContent = pad(i) + ' / ' + pad(panels.length - 1);
+    try { history.replaceState(null, '', '#' + PANELS[i].hash); } catch(e){}
+  }
+  function settled(){
+    pending = null;
+    var i = current();
+    panels.forEach(function(p, k){ if (k === i) p.removeAttribute('inert'); else p.setAttribute('inert',''); });
+    if (focusOnSettle){
+      var h = panels[i].querySelector('h1,h2');
+      if (h) h.focus({preventScroll:true});
+      focusOnSettle = false;
+    }
+  }
+  deck.addEventListener('scroll', function(){ sync(); clearTimeout(settle); settle = setTimeout(settled, 140); }, {passive:true});
+  window.addEventListener('resize', function(){ deck.scrollTo({left: active * deck.clientWidth, behavior:'instant'}); });
+  window.addEventListener('hashchange', function(){ var i = indexOfHash(location.hash); if (i > -1 && i !== current()) goTo(i, true); });
+  prevBtn.addEventListener('click', function(){ step(-1); });
+  nextBtn.addEventListener('click', function(){ step(1); });
+  prevM.addEventListener('click', function(){ step(-1); });
+  nextM.addEventListener('click', function(){ step(1); });
+  Array.prototype.forEach.call(document.querySelectorAll('[data-go]'), function(b){
+    b.addEventListener('click', function(){ goTo(indexOfHash(b.getAttribute('data-go')), true); });
+  });
+  window.addEventListener('keydown', function(e){
+    if (e.altKey || e.ctrlKey || e.metaKey) return;
+    if (e.key === 'ArrowRight' || e.key === 'PageDown'){ e.preventDefault(); step(1); }
+    else if (e.key === 'ArrowLeft' || e.key === 'PageUp'){ e.preventDefault(); step(-1); }
+    else if (e.key === 'Home'){ e.preventDefault(); goTo(0, true); }
+    else if (e.key === 'End'){ e.preventDefault(); goTo(panels.length - 1, true); }
+    else if (e.key.length === 1 && e.key >= '1' && e.key <= '6'){ goTo(+e.key, true); }
+    else if (e.key === '0'){ goTo(0, true); }
+  });
+  var wheelLock = false;
+  deck.addEventListener('wheel', function(e){
+    if (Math.abs(e.deltaX) > Math.abs(e.deltaY)) return;
+    var p = panels[current()];
+    var atTop = p.scrollTop <= 0, atBottom = p.scrollTop + p.clientHeight >= p.scrollHeight - 2;
+    if ((e.deltaY > 0 && !atBottom) || (e.deltaY < 0 && !atTop)) return;
+    e.preventDefault();
+    if (wheelLock || Math.abs(e.deltaY) < 8) return;
+    wheelLock = true; step(e.deltaY > 0 ? 1 : -1);
+    setTimeout(function(){ wheelLock = false; }, 900);
+  }, {passive:false});
+
+  var start = indexOfHash(location.hash);
+  if (start > 0) deck.scrollTo({left: start * deck.clientWidth, behavior:'instant'});
+  sync(); settled();
+
+  /* ================= 01 session timeline ================= */
+  var SEGS = [
+    {ph:'discover', p:'Discover', q:'quick', m:4, w:11, sn:'Temp check', n:'Temperature check', f:'Whole room, then groups', what:'Before the Maze, a quick temperature check on how the room feels about AI. People discuss their opinions of AI in groups, then with me.'},
+    {ph:'discover', p:'Discover', m:15, n:'The Maze', f:'Floor game · 4 teams', what:'Teams cross a puzzle-mat grid one step at a time. I can only say “correct” or “incorrect”, and a wrong step passes the turn to the next team.', ask:'“How did you find the challenge?”', slide:'AI doesn’t understand things the way we do. It learns patterns from huge numbers of examples, then predicts what’s most likely to come next.', go:'maze'},
+    {ph:'discover', p:'Discover', m:10, n:'Build the Bot', f:'Timed challenge · 4 teams', what:'Four teams build the same magnetic-tile bot in 3 minutes from different information: told verbally only, the image for 30 seconds, a written prompt, or the prompt and the image.', ask:'“What tools did you have? What made it easier or harder?”', slide:'Your Input = The Output. Better prompts = better answers.', go:'bot'},
+    {ph:'name', p:'Name it', m:10, n:'PRO Deck', f:'Card game · 4 teams', what:'Teams piece together the PRO sentence cards. The first team to finish wins.', ask:'“What pattern can you see? What does it spell?”', slide:'The PRO framework: Persona, Role, Output.', go:'pro'},
+    {ph:'practise', p:'Practise', m:10, n:'Prompt Builder', f:'Worksheet · 4 teams', what:'Teams build their own prompt from the examples while I walk the room. Volunteers read theirs out.', slide:'You don’t just tell AI what to do — you guide how it does it.', go:'pro'},
+    {ph:'practise', p:'Practise', m:5, n:'Break', f:'Individuals', what:'Everyone writes down a business idea they’ve never pursued, and downloads ChatGPT.', ask:'“What’s a business idea you’ve always had but never pursued?”', go:'apply'},
+    {ph:'practise', p:'Practise', m:15, n:'ChatGPT onboarding', f:'Live demo · whole room', what:'How to access ChatGPT and its models and tools. Then a vague prompt against a good PRO prompt written by one of the teams, and a business idea with a volunteer.'},
+    {ph:'apply', p:'Apply', m:20, n:'Prompt & Profit', f:'Worksheet · individuals', what:'Each person works through four prompts in ChatGPT on their own goals while I coach one to one.', go:'apply'},
+    {ph:'apply', p:'Apply', m:4, w:7, q:'end', n:'Close', f:'Whole room', what:'A PRO recap, open questions, my email for follow-up, and the 21-prompt cheat sheet to take home.', ask:'“What’s one thing you learned today?”', slide:'Master AI before it masters you.', go:'checks'}
+  ];
+  var bar = document.getElementById('bar90'), segDetail = document.getElementById('segDetail');
+  var segBtns = SEGS.map(function(s, i){
+    var li = document.createElement('li'); li.style.flex = (s.w || s.m) + ' 1 0';
+    var b = document.createElement('button'); b.className = 'seg ph-' + s.ph;
+    var dur = s.q ? s.q : s.m ? s.m + ' min' : '';
+    b.innerHTML = '<span class="nm">' + (s.sn || s.n) + '</span><span class="mn">' + dur + '</span>';
+    b.setAttribute('aria-label', s.n + (dur ? ', ' + dur + ' planned' : '') + ', ' + s.p);
+    b.addEventListener('click', function(){ showSeg(i); });
+    li.appendChild(b); bar.appendChild(li);
+    return b;
+  });
+  function esc(t){ return t.replace(/&/g,'&amp;').replace(/</g,'&lt;'); }
+  function showSeg(i){
+    var s = SEGS[i];
+    segBtns.forEach(function(b, k){ b.setAttribute('aria-pressed', k === i ? 'true' : 'false'); });
+    segDetail.className = 'card seg-detail ph-' + s.ph;
+    var h = '<div class="t">' + esc(s.n) + ' <small>' + (s.q ? s.q : s.m ? s.m + ' min planned' : 'end of session') + ' · ' + s.p + '</small></div>' +
+            '<span class="k">Format</span><span>' + esc(s.f) + '</span>' +
+            '<span class="k">What happens</span><span>' + esc(s.what) + '</span>';
+    if (s.ask) h += '<span class="k">Ask</span><span class="quote">' + esc(s.ask) + '</span>';
+    if (s.slide) h += '<span class="k">Slide</span><span class="quote">“' + esc(s.slide) + '”</span>';
+    if (s.go) h += '<span></span><span><a href="#' + s.go + '" data-jump="' + s.go + '">See it in detail →</a></span>';
+    segDetail.innerHTML = h;
+    var j = segDetail.querySelector('[data-jump]');
+    if (j) j.addEventListener('click', function(e){ e.preventDefault(); goTo(indexOfHash(s.go), true); });
+  }
+  showSeg(0);
+
+  /* ================= 02 maze ================= */
+  var SIZE = 4, PATH = [[3,1],[2,1],[2,2],[1,2],[1,3],[0,3]];
+  var mazeEl = document.getElementById('mazeGrid'), mazeMsg = document.getElementById('mazeMsg'), reveal = document.getElementById('mazeReveal');
+  var cells = [], pos, wrong, steps;
+  for (var r = 0; r < SIZE; r++){
+    for (var c = 0; c < SIZE; c++){
+      (function(r, c){
+        var b = document.createElement('button');
+        b.className = 'mat c' + ((r + c * 3) % 4);
+        b.setAttribute('role','gridcell');
+        b.addEventListener('click', function(){ tread(r, c); });
+        mazeEl.appendChild(b); cells.push(b);
+      })(r, c);
+    }
+  }
+  function cell(r, c){ return cells[r * SIZE + c]; }
+  function label(r, c, state){ cell(r,c).setAttribute('aria-label', 'Row ' + (SIZE - r) + ' from the bottom, column ' + (c + 1) + (state ? ', ' + state : '')); }
+  function say(cls, html){ mazeMsg.className = 'maze-msg ' + cls; mazeMsg.innerHTML = html; }
+  function resetMaze(){
+    pos = -1; wrong = 0; steps = 0; reveal.hidden = true;
+    for (var r = 0; r < SIZE; r++) for (var c = 0; c < SIZE; c++){ cell(r,c).className = 'mat c' + ((r + c * 3) % 4); cell(r,c).disabled = false; label(r,c); }
+    say('', 'Pick a mat on the bottom row to step on.');
+  }
+  function tread(r, c){
+    if (pos === PATH.length - 1) return;
+    var el = cell(r, c);
+    if (el.classList.contains('good') || el.classList.contains('bad')) { say('', 'You already know that one. Try another mat.'); return; }
+    if (pos === -1){
+      if (r !== SIZE - 1){ say('', 'Start from the bottom row.'); return; }
+    } else {
+      var cur = PATH[pos];
+      if (Math.abs(cur[0] - r) + Math.abs(cur[1] - c) !== 1){ say('', 'One step at a time, and no diagonals.'); return; }
+    }
+    steps++;
+    var nxt = PATH[pos + 1];
+    if (nxt[0] === r && nxt[1] === c){
+      if (pos > -1) cell(PATH[pos][0], PATH[pos][1]).classList.remove('here');
+      pos++; el.classList.add('good','here'); label(r, c, 'correct');
+      if (pos === PATH.length - 1){
+        say('good', '<b>Out!</b> ' + steps + ' steps and ' + wrong + ' wrong turn' + (wrong === 1 ? '' : 's') + ', and nobody showed you a map. Feedback alone got you through.');
+        reveal.hidden = false;
+      } else {
+        say('good', '<b>Correct.</b> Where next?');
+      }
+    } else {
+      wrong++; el.classList.add('bad'); label(r, c, 'incorrect');
+      say('bad', '<b>Incorrect.</b> In the room, the next team takes over, having watched every step so far.');
+    }
+  }
+  document.getElementById('mazeReset').addEventListener('click', resetMaze);
+  resetMaze();
+
+  /* ================= 03 build the bot ================= */
+  var TEAMS = [
+    {k:'verbal', n:'Verbal only', img:['off','None'], words:['off','None. Just told to build a bot'], like:'with no context at all. You get something, but it’s a guess.'},
+    {k:'image', n:'Image only', img:['part','30 seconds, then taken away'], words:['off','None'], like:'with a rough idea and no detail. It gets the gist and fills the gaps itself.'},
+    {k:'written', n:'Written only', img:['off','None'], words:['on','The written prompt'], like:'with words but no example. The result depends on how clearly the words are written.'},
+    {k:'both', n:'Written + image', img:['on','Yes'], words:['on','The written prompt'], like:'with clear instructions plus an example to follow. The closest to a good prompt.'}
+  ];
+  var tp = document.getElementById('teamPicker'), ti = document.getElementById('teamInputs'), tl = document.getElementById('teamLike');
+  var teamBtns = TEAMS.map(function(t, i){
+    var b = document.createElement('button'); b.className = 'pick'; b.textContent = t.n;
+    b.addEventListener('click', function(){ showTeam(i); });
+    tp.appendChild(b); return b;
+  });
+  function showTeam(i){
+    var t = TEAMS[i];
+    teamBtns.forEach(function(b, k){ b.setAttribute('aria-pressed', k === i ? 'true' : 'false'); });
+    ti.innerHTML = '<div class="rf"><div class="k">Image</div><div class="v ' + t.img[0] + '">' + t.img[1] + '</div></div>' +
+                   '<div class="rf"><div class="k">Written prompt</div><div class="v ' + t.words[0] + '">' + t.words[1] + '</div></div>';
+    tl.textContent = t.like.charAt(0).toUpperCase() + t.like.slice(1);
+  }
+  showTeam(0);
+
+  /* ================= 04 PRO builder ================= */
+  var OPTS = {
+    p:['helpful English tutor','experienced YouTube coach','patient business mentor','strict interview coach'],
+    r:['a total beginner','nervous about public speaking','trying to save money','starting a new job'],
+    o:['step-by-step','in 3 bullet points','by asking 2 questions first','using examples']
+  };
+  var pick = {p:2, r:0, o:0};
+  var assembled = document.getElementById('assembled');
+  Array.prototype.forEach.call(document.querySelectorAll('.opts'), function(box){
+    var slot = box.getAttribute('data-slot');
+    OPTS[slot].forEach(function(o, i){
+      var b = document.createElement('button'); b.className = 'opt'; b.textContent = o;
+      b.addEventListener('click', function(){ pick[slot] = i; renderPro(); });
+      box.appendChild(b);
+    });
+  });
+  function renderPro(){
+    Array.prototype.forEach.call(document.querySelectorAll('.opts'), function(box){
+      var slot = box.getAttribute('data-slot');
+      Array.prototype.forEach.call(box.children, function(b, i){ b.setAttribute('aria-pressed', i === pick[slot] ? 'true' : 'false'); });
+    });
+    var a = /^[aeiou]/i.test(OPTS.p[pick.p]) ? 'an' : 'a';
+    assembled.innerHTML = '“You are ' + a + ' <span class="cp">' + OPTS.p[pick.p] + '</span>. Act like you’re helping someone who is <span class="cr">' +
+      OPTS.r[pick.r] + '</span>. Explain it <span class="co">' + OPTS.o[pick.o] + '</span>.”';
+  }
+  renderPro();
+
+  /* ================= 05 apply ================= */
+  var PROMPTS = [
+    {n:'1 · Understand yourself', goal:'Help AI learn who you are and what you want.', p:'You are a friendly and curious assistant. Ask me 5 smart questions to understand who I am, what I’m good at, and what I want to achieve. Use simple language.', b:'Starts the conversation: the AI asks, the learner answers.'},
+    {n:'2 · Learn a skill', goal:'Turn your interests into an actionable learning plan.', p:'You are a personal learning coach. Based on what I told you about my background and goals, suggest one skill I should learn that will help me move forward. Then create a 5-day plan to learn it in short daily sessions (30 minutes or less). Include the tools or resources I should use.', b:'Builds on prompt 1’s answers.'},
+    {n:'3 · Explore ways to earn', goal:'Find small, low-cost ways you could test earning online with your skill and AI.', p:'You are a practical side-income coach. Based on my background and the skill I’m learning, suggest 3 ways I could test earning online over the next 30 days. Focus on simple, low-cost methods I can try without needing a big audience, and be realistic about the time and effort each one takes. Include the AI tools or workflows I can use to speed things up.', b:'Builds on prompts 1 and 2.'},
+    {n:'4 · Start or grow a business', goal:'Use AI to build something long-term.', p:'You are an AI business strategist. Based on my skills, income ideas and goals, suggest 3 ways I could start or grow a small business using AI. Show me how AI could save time and automate key tasks (like marketing, customer service or outreach). Focus on simple systems I can build without coding.', b:'Brings in the business idea from the break.'}
+  ];
+  var ptabs = document.getElementById('ptabs'), pcard = document.getElementById('pcard');
+  var pBtns = PROMPTS.map(function(p, i){
+    var b = document.createElement('button'); b.className = 'ptab'; b.textContent = p.n.split(' · ')[0] + ' · ' + p.n.split(' · ')[1].split(' ')[0] + '…';
+    b.setAttribute('aria-label', 'Prompt ' + p.n);
+    b.addEventListener('click', function(){ showPrompt(i); });
+    ptabs.appendChild(b); return b;
+  });
+  function showPrompt(i){
+    var p = PROMPTS[i];
+    pBtns.forEach(function(b, k){ b.setAttribute('aria-pressed', k === i ? 'true' : 'false'); });
+    pcard.innerHTML = '<h3>' + esc(p.n.split(' · ')[1]) + '</h3><p class="goal"><b style="color:var(--ink)">Goal:</b> ' + esc(p.goal) + '</p><p class="pt">' + esc(p.p) + '</p><span class="builds">' + esc(p.b) + '</span>';
+  }
+  showPrompt(0);
+})();
+</script>
+</body>
+</html>
