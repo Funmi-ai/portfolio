@@ -24,10 +24,10 @@
   --mono:"JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
   color-scheme: dark;
 }
-html,body{height:100%; margin:0;}
+html,body{margin:0;}
+html{scroll-behavior:smooth;}
 *{box-sizing:border-box}
-body{background:var(--bg); color:var(--ink); font-family:var(--body); font-size:15px; overscroll-behavior-y:none;
-  display:flex; flex-direction:column;}
+body{background:var(--bg); color:var(--ink); font-family:var(--body); font-size:15px;}
 h1,h2,h3{margin:0; text-wrap:balance; font-weight:600;}
 p{margin:0; line-height:1.6;}
 a{color:var(--accent);}
@@ -38,18 +38,15 @@ img{max-width:100%; display:block;}
 .muted{color:var(--muted);}
 
 /* ---------- deck ---------- */
-.deck{flex:1 1 auto; min-height:0; display:flex; overflow-x:auto; overflow-y:hidden; scroll-snap-type:x mandatory;
-  overscroll-behavior-x:contain; scrollbar-width:none;}
-.deck::-webkit-scrollbar{display:none;}
-@media (prefers-reduced-motion:no-preference){ .deck{scroll-behavior:smooth;} }
-.panel{flex:0 0 100%; height:100%; overflow-y:auto; scroll-snap-align:start; scroll-snap-stop:always;
-  padding-block:56px 40px;
+.deck{display:block;}
+.panel{display:block; padding-block:72px 40px;
   padding-left:max(80px, calc(env(safe-area-inset-left,0px) + 72px));
-  padding-right:max(80px, calc(env(safe-area-inset-right,0px) + 72px));
-  display:flex;}
-.inner{width:100%; max-width:1120px; margin:auto; display:flex; flex-direction:column; gap:22px;}
+  padding-right:max(80px, calc(env(safe-area-inset-right,0px) + 72px));}
+.panel + .panel{border-top:1px solid var(--line);}
+#p-intro{padding-top:88px;}
+.inner{width:100%; max-width:1120px; margin:0 auto; display:flex; flex-direction:column; gap:22px;}
 @media (max-width:640px){
-  .panel{padding-block:28px 28px;
+  .panel{padding-block:44px 32px;
     padding-left:max(16px, calc(env(safe-area-inset-left,0px) + 16px));
     padding-right:max(16px, calc(env(safe-area-inset-right,0px) + 16px));}
 }
@@ -100,6 +97,8 @@ details ul b{color:var(--ink); font-weight:600;}
 .proof .t{font-weight:600; font-size:15px; line-height:1.35;}
 .proof .f{font-family:var(--mono); font-size:11.5px; color:var(--muted); margin-top:auto;}
 .hint{font-family:var(--mono); font-size:12px; color:var(--faint);}
+.jump{font-family:var(--mono); font-size:12.5px;}
+.jump a{color:var(--accent); text-decoration:none; border-bottom:1px solid rgba(226,146,95,.4);}
 
 /* ---------- session timeline ---------- */
 .ph-discover{--ph:var(--accent); --ph-soft:var(--accent-soft);}
@@ -276,18 +275,14 @@ details ul b{color:var(--ink); font-weight:600;}
           <div class="role">AI automation consultant &amp; trainer</div>
           <p class="intro">In May 2025 I designed and delivered an AI masterclass for 50+ professionals in Tanzania, most of them new to generative AI. I don’t like to talk at people, so I always opt for interactive games and activities that get people involved and teach through play.</p>
           <p class="bg">Before AI: counselling, mentoring and group facilitation with young people in Panama, Malta and London.</p>
+          <p class="jump"><a href="#p-session">See the session ↓</a> &nbsp;·&nbsp; <a href="#p-checks">How I’d make it better ↓</a> &nbsp;·&nbsp; <a href="pdf/ProJourno_Slides_as_presented.pdf" target="_blank" rel="noopener">The slides (PDF)</a></p>
         </div>
         <figure class="cover-photo">
           <img src="img/maze-mats.jpg" alt="Fattima presenting at the ProJourno Masterclass, with the puzzle-mat maze on the floor and the title slide “AI is here: Are you in or out?” behind her." width="900" height="1200">
           <figcaption>ProJourno Masterclass, Tanzania, 30 May 2025. The puzzle mats on the floor are the Maze.</figcaption>
         </figure>
       </div>
-      <div class="proofs">
-        <button class="proof" data-seg="1"><span class="n">01 · Discover</span><span class="t">Two games that show how AI responds</span><span class="f">The Maze · Build the Bot</span></button>
-        <button class="proof" data-seg="3"><span class="n">02 · Name it</span><span class="t">A framework learners find for themselves</span><span class="f">PRO: Persona, Role, Output</span></button>
-        <button class="proof" data-seg="7"><span class="n">03 · Apply</span><span class="t">From team practice to their own goals</span><span class="f">Prompt Builder · Prompt &amp; Profit</span></button>
-      </div>
-      <div class="hint">Swipe or use ← → · on the session page, click any activity to open it · try the maze and the prompt builder</div>
+
     </div>
   </section>
 
@@ -295,7 +290,7 @@ details ul b{color:var(--ink); font-weight:600;}
   <section class="panel" id="p-session" aria-label="01 The session">
     <div class="inner">
       <div class="head">
-        <span class="label">01 · The session</span>
+        <span class="label">The session</span>
         <h2 tabindex="-1">Two hours, built around doing.</h2>
         <p class="lede">Beginners are often shown which buttons to press without learning why AI responds the way it does. My aim was for the room to understand how AI responds to information and instructions, and to leave confident they could work out their own prompts.</p>
       </div>
@@ -412,7 +407,7 @@ details ul b{color:var(--ink); font-weight:600;}
   <section class="panel" id="p-checks" aria-label="02 How I would improve it">
     <div class="inner">
       <div class="head">
-        <span class="label">02 · Next time</span>
+        <span class="label">Next time</span>
         <h2 tabindex="-1">How I’d make it better.</h2>
         <p class="lede">Looking back, these are the changes I’d make before running it again.</p>
       </div>
@@ -453,107 +448,13 @@ details ul b{color:var(--ink); font-weight:600;}
   </section>
 </div>
 
-<button class="side-arrow left" id="prev" aria-label="Previous section">←</button>
-<button class="side-arrow right" id="next" aria-label="Next section">→</button>
-<div class="navwrap"><nav class="bar" aria-label="Sections">
-  <button class="bar-arrow" id="prevM" aria-label="Previous section">←</button>
-  <span class="count" id="count">00 / 02</span><div class="tabs" id="tabs"></div>
-  <button class="bar-arrow" id="nextM" aria-label="Next section">→</button>
-</nav></div>
+
 
 <script>
 (function(){
   var reduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  /* ================= navigation (same as the BDR portfolio) ================= */
-  var PANELS = [
-    {id:'p-intro', hash:'intro', label:'Intro'},
-    {id:'p-session', hash:'session', label:'Session'},
-    {id:'p-checks', hash:'next-time', label:'Next time'}
-  ];
-  var deck = document.getElementById('deck');
-  var panels = PANELS.map(function(p){ return document.getElementById(p.id); });
-  var prevBtn = document.getElementById('prev'), nextBtn = document.getElementById('next');
-  var prevM = document.getElementById('prevM'), nextM = document.getElementById('nextM');
-  var countEl = document.getElementById('count'), tabsEl = document.getElementById('tabs');
-  var active = -1, pending = null, settle = null, focusOnSettle = false;
 
-  function indexOfHash(h){ h = (h || '').replace('#',''); for (var i=0;i<PANELS.length;i++){ if (PANELS[i].hash === h) return i; } return -1; }
-  function current(){ return Math.round(deck.scrollLeft / deck.clientWidth); }
-  function pad(n){ return (n < 10 ? '0' : '') + n; }
-
-  var tabs = PANELS.map(function(p, i){
-    var b = document.createElement('button');
-    b.className = 'tab'; b.textContent = p.label;
-    b.setAttribute('aria-label', (i ? pad(i) + ' ' : '') + p.label);
-    b.addEventListener('click', function(){ goTo(i, true); });
-    tabsEl.appendChild(b);
-    return b;
-  });
-
-  function goTo(i, withFocus){
-    i = Math.max(0, Math.min(panels.length - 1, i));
-    pending = i; focusOnSettle = !!withFocus;
-    if (i === current()){ sync(); settled(); return; }
-    deck.scrollTo({left: i * deck.clientWidth, behavior: reduced ? 'auto' : 'smooth'});
-    clearTimeout(settle);
-    settle = setTimeout(function(){ sync(); settled(); }, reduced ? 30 : 650);
-  }
-  function step(d){ goTo((pending !== null ? pending : current()) + d, true); }
-
-  function sync(){
-    var i = current();
-    if (i === active) return;
-    active = i;
-    tabs.forEach(function(t, k){ if (k === i) t.setAttribute('aria-current','true'); else t.removeAttribute('aria-current'); });
-    prevBtn.disabled = prevM.disabled = i === 0; nextBtn.disabled = nextM.disabled = i === panels.length - 1;
-    countEl.textContent = pad(i) + ' / ' + pad(panels.length - 1);
-    try { history.replaceState(null, '', '#' + PANELS[i].hash); } catch(e){}
-  }
-  function settled(){
-    pending = null;
-    var i = current();
-    panels.forEach(function(p, k){ if (k === i) p.removeAttribute('inert'); else p.setAttribute('inert',''); });
-    if (focusOnSettle){
-      var h = panels[i].querySelector('h1,h2');
-      if (h) h.focus({preventScroll:true});
-      focusOnSettle = false;
-    }
-  }
-  deck.addEventListener('scroll', function(){ sync(); clearTimeout(settle); settle = setTimeout(settled, 140); }, {passive:true});
-  window.addEventListener('resize', function(){ deck.scrollTo({left: active * deck.clientWidth, behavior:'instant'}); });
-  window.addEventListener('hashchange', function(){ var i = indexOfHash(location.hash); if (i > -1 && i !== current()) goTo(i, true); });
-  prevBtn.addEventListener('click', function(){ step(-1); });
-  nextBtn.addEventListener('click', function(){ step(1); });
-  prevM.addEventListener('click', function(){ step(-1); });
-  nextM.addEventListener('click', function(){ step(1); });
-  Array.prototype.forEach.call(document.querySelectorAll('[data-go]'), function(b){
-    b.addEventListener('click', function(){ goTo(indexOfHash(b.getAttribute('data-go')), true); });
-  });
-  window.addEventListener('keydown', function(e){
-    if (e.altKey || e.ctrlKey || e.metaKey) return;
-    if (e.key === 'ArrowRight' || e.key === 'PageDown'){ e.preventDefault(); step(1); }
-    else if (e.key === 'ArrowLeft' || e.key === 'PageUp'){ e.preventDefault(); step(-1); }
-    else if (e.key === 'Home'){ e.preventDefault(); goTo(0, true); }
-    else if (e.key === 'End'){ e.preventDefault(); goTo(panels.length - 1, true); }
-    else if (e.key.length === 1 && e.key >= '1' && e.key <= '2'){ goTo(+e.key, true); }
-    else if (e.key === '0'){ goTo(0, true); }
-  });
-  var wheelLock = false;
-  deck.addEventListener('wheel', function(e){
-    if (Math.abs(e.deltaX) > Math.abs(e.deltaY)) return;
-    var p = panels[current()];
-    var atTop = p.scrollTop <= 0, atBottom = p.scrollTop + p.clientHeight >= p.scrollHeight - 2;
-    if ((e.deltaY > 0 && !atBottom) || (e.deltaY < 0 && !atTop)) return;
-    e.preventDefault();
-    if (wheelLock || Math.abs(e.deltaY) < 8) return;
-    wheelLock = true; step(e.deltaY > 0 ? 1 : -1);
-    setTimeout(function(){ wheelLock = false; }, 900);
-  }, {passive:false});
-
-  var start = indexOfHash(location.hash);
-  if (start > 0) deck.scrollTo({left: start * deck.clientWidth, behavior:'instant'});
-  sync(); settled();
 
   /* ================= 01 session timeline ================= */
   var SEGS = [
@@ -599,9 +500,6 @@ details ul b{color:var(--ink); font-weight:600;}
   var current_seg = 0;
   document.getElementById('segPrev').addEventListener('click', function(){ showSeg(Math.max(0, current_seg - 1)); });
   document.getElementById('segNext').addEventListener('click', function(){ showSeg(Math.min(SEGS.length - 1, current_seg + 1)); });
-  Array.prototype.forEach.call(document.querySelectorAll('[data-seg]'), function(b){
-    b.addEventListener('click', function(){ showSeg(+b.getAttribute('data-seg')); goTo(indexOfHash('session'), true); });
-  });
   showSeg(0);
 
   /* ================= 02 maze ================= */
