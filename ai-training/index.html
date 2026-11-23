@@ -130,6 +130,7 @@ details ul b{color:var(--ink); font-weight:600;}
 .seg-nav{display:flex; justify-content:space-between; gap:10px; border-top:1px solid var(--line); padding-top:14px;}
 .small-btn:disabled{opacity:.3; cursor:default;}
 .seg-detail .k{padding-top:3px;}
+.seg-detail .chk{color:var(--ph);}
 .seg-detail .t{font-family:var(--display); font-size:22px; grid-column:1/-1; display:flex; align-items:baseline; gap:12px; flex-wrap:wrap;}
 .seg-detail .t small{font-family:var(--mono); font-size:11.5px; color:var(--ph);}
 @media (max-width:520px){ .seg-detail{grid-template-columns:minmax(0,1fr); gap:2px;} .seg-detail .k{padding-top:10px;} }
@@ -407,49 +408,44 @@ details ul b{color:var(--ink); font-weight:600;}
     </div>
   </section>
 
-  <!-- ===================== 06 CHECKS + MATERIALS ===================== -->
-  <section class="panel" id="p-checks" aria-label="02 Checking understanding and materials">
+  <!-- ===================== 02 NEXT TIME ===================== -->
+  <section class="panel" id="p-checks" aria-label="02 How I would improve it">
     <div class="inner">
       <div class="head">
-        <span class="label">02 · Checking it landed</span>
-        <h2 tabindex="-1">Every activity ends with a question.</h2>
+        <span class="label">02 · Next time</span>
+        <h2 tabindex="-1">How I’d make it better.</h2>
+        <p class="lede">Looking back, these are the changes I’d make before running it again.</p>
       </div>
       <div class="split">
         <div class="card">
-          <span class="label" style="display:block; margin-bottom:14px;">As delivered</span>
+          <span class="label" style="display:block; margin-bottom:14px;">From the day itself</span>
           <ul class="checklist">
-            <li><span class="when">Before the Maze</span><span>A quick temperature check, then groups discuss their opinions of AI, with each other and with me. Where is the room starting from?</span></li>
-            <li><span class="when">The Maze</span><span>“How did you find the challenge?” Did teams notice feedback alone got them through?</span></li>
-            <li><span class="when">Build the Bot</span><span>“What tools did you have? What made it easier or harder?” Do they link the result to the brief?</span></li>
-            <li><span class="when">PRO Deck</span><span>“What pattern can you see?” Can they spot the structure before it’s named?</span></li>
-            <li><span class="when">Prompt Builder</span><span>Volunteers read prompts aloud while I walk the room.</span></li>
-            <li><span class="when">Live demo</span><span>A team’s prompt against a vague one, using their own work.</span></li>
-            <li><span class="when">Prompt &amp; Profit</span><span>One-to-one coaching as each person works in ChatGPT.</span></li>
-            <li><span class="when">Close</span><span>“What’s one thing you learned today?”</span></li>
+            <li><span class="when">Timing</span><span>It was planned as 90 minutes and ran to two hours. I’d plan for two hours from the start, or trim the onboarding demo, so the last activity never gets squeezed.</span></li>
+            <li><span class="when">One meaning of Role</span><span>My slide called Role “what job or point of view the AI should take”, while my worksheet used “who it’s helping”. I’d use one definition everywhere: Persona is the AI, Role is the person on the receiving end.</span></li>
+            <li><span class="when">The Maze slide</span><span>“AI learns through trial and error” works as a hook. I’d follow it with the fuller picture: AI learns patterns from huge numbers of examples, then predicts what’s most likely to come next.</span></li>
+            <li><span class="when">Earning ideas</span><span>I’d frame the Prompt &amp; Profit earning prompts as small experiments to test, and be realistic about the effort, rather than anything that sounds like a promise of income.</span></li>
           </ul>
         </div>
-        <div class="stack">
-          <div class="future">
-            <span class="label">What I’d add next time · not part of the original session</span>
-            <ul>
-              <li><b>Before-and-after prompt.</b> Write a prompt for your business idea at the start, rewrite it with PRO at the end and compare the answers.</li>
-              <li><b>Spot the missing letter.</b> Show three short prompts and ask which part of PRO each is missing.</li>
-              <li><b>Pair check.</b> Swap prompts and check each other’s against P, R and O.</li>
-              <li><b>Confidence check.</b> Hands up from 1 to 5, at the start and the end.</li>
-              <li><b>Exit card.</b> One thing learned and one open question, to shape follow-up.</li>
-            </ul>
-          </div>
-          <div class="stack" style="gap:10px;">
-            <span class="label">The materials</span>
-            <div class="repos">
-              <a class="repo" href="pdf/Fattima_Goffe_AI_Training_Portfolio.pdf" target="_blank" rel="noopener"><span>↓</span> Full portfolio (PDF)</a>
-              <a class="repo" href="pdf/ProJourno_Slides_as_presented.pdf" target="_blank" rel="noopener"><span>↓</span> Slides as presented</a>
-              <a class="repo" href="pdf/A_Facilitator_Run_Sheet.pdf" target="_blank" rel="noopener"><span>↓</span> Run sheet</a>
-              <a class="repo" href="pdf/B_Build_the_Bot.pdf" target="_blank" rel="noopener"><span>↓</span> Build the Bot</a>
-              <a class="repo" href="pdf/C_PRO_Framework_and_Prompt_Builder.pdf" target="_blank" rel="noopener"><span>↓</span> PRO + Prompt Builder</a>
-              <a class="repo" href="pdf/D_Prompt_and_Profit_Worksheet.pdf" target="_blank" rel="noopener"><span>↓</span> Prompt &amp; Profit</a>
-            </div>
-          </div>
+        <div class="future">
+          <span class="label">Checking understanding more clearly</span>
+          <ul>
+            <li><b>Confidence score.</b> Turn the opening temperature check into a quick 1–5, then ask again at the end, so the room can see its own shift.</li>
+            <li><b>Before-and-after prompt.</b> Everyone writes a prompt for their business idea at the start, rewrites it with PRO at the end and compares the answers.</li>
+            <li><b>Spot the missing letter.</b> Show three short prompts and ask which part of PRO each one is missing. The Prompt Fixer handout already has vague prompts for this.</li>
+            <li><b>Pair check.</b> Partners swap Prompt Builder prompts and check them against P, R and O before volunteers read theirs out.</li>
+            <li><b>Exit card.</b> One thing learned and one open question, so follow-up support can answer what’s still open.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="stack" style="gap:10px;">
+        <span class="label">The materials</span>
+        <div class="repos">
+          <a class="repo" href="pdf/Fattima_Goffe_AI_Training_Portfolio.pdf" target="_blank" rel="noopener"><span>↓</span> Full portfolio (PDF)</a>
+          <a class="repo" href="pdf/ProJourno_Slides_as_presented.pdf" target="_blank" rel="noopener"><span>↓</span> Slides as presented</a>
+          <a class="repo" href="pdf/A_Facilitator_Run_Sheet.pdf" target="_blank" rel="noopener"><span>↓</span> Run sheet</a>
+          <a class="repo" href="pdf/B_Build_the_Bot.pdf" target="_blank" rel="noopener"><span>↓</span> Build the Bot</a>
+          <a class="repo" href="pdf/C_PRO_Framework_and_Prompt_Builder.pdf" target="_blank" rel="noopener"><span>↓</span> PRO + Prompt Builder</a>
+          <a class="repo" href="pdf/D_Prompt_and_Profit_Worksheet.pdf" target="_blank" rel="noopener"><span>↓</span> Prompt &amp; Profit</a>
         </div>
       </div>
       <p class="foot">The original session materials, lightly edited for this portfolio. I used a Custom GPT I had built to brainstorm and structure the session. I delivered it as Fattima Mahdi; I have since married.</p>
@@ -473,7 +469,7 @@ details ul b{color:var(--ink); font-weight:600;}
   var PANELS = [
     {id:'p-intro', hash:'intro', label:'Intro'},
     {id:'p-session', hash:'session', label:'Session'},
-    {id:'p-checks', hash:'checks', label:'Checks'}
+    {id:'p-checks', hash:'next-time', label:'Next time'}
   ];
   var deck = document.getElementById('deck');
   var panels = PANELS.map(function(p){ return document.getElementById(p.id); });
@@ -561,15 +557,15 @@ details ul b{color:var(--ink); font-weight:600;}
 
   /* ================= 01 session timeline ================= */
   var SEGS = [
-    {ph:'discover', p:'Discover', q:'quick', m:4, w:11, sn:'Temp check', n:'Temperature check', f:'Whole room, then groups', what:'Before the Maze, a quick temperature check on how the room feels about AI. People discuss their opinions of AI in groups, then with me.'},
-    {ph:'discover', p:'Discover', m:15, n:'The Maze', f:'Floor game · 4 teams', what:'Puzzle mats on the floor become a grid with one hidden path. Teams step through one mat at a time, and I can only say “correct” or “incorrect”. Even though nobody saw the path, through trial and error they were able to find it.', ask:'“How did you find the challenge?”', x:'maze'},
-    {ph:'discover', p:'Discover', m:10, n:'Build the Bot', f:'Timed challenge · 4 teams', what:'Four teams get the same magnetic tiles and three minutes to build this bot, but each team gets different information: told verbally only, the image for 30 seconds, a written prompt, or the prompt and the image. Then we compare the builds, before any prompting has been taught.', ask:'“What tools did you have? What made it easier or harder?”', slide:'Your Input = The Output. Better prompts = better answers.', x:'bot'},
-    {ph:'name', p:'Name it', m:10, n:'PRO Deck', f:'Card game · 4 teams', what:'Teams piece together the PRO sentence cards until someone spots the pattern. The first team to finish wins. Only then does the framework get its name.', ask:'“What pattern can you see? What does it spell?”', slide:'The PRO framework: Persona, Role, Output.', x:'pro'},
-    {ph:'practise', p:'Practise', m:10, n:'Prompt Builder', f:'Worksheet · 4 teams', what:'Teams build their own prompt one letter at a time from the example options while I walk the room. Volunteers read theirs out, and one team’s prompt is used later in the live demo.', slide:'You don’t just tell AI what to do — you guide how it does it.', x:'builder'},
+    {ph:'discover', p:'Discover', q:'quick', m:4, w:11, sn:'Temp check', n:'Temperature check', chk:'Where the room is starting from: how people feel about AI before anything is taught.', f:'Whole room, then groups', what:'Before the Maze, a quick temperature check on how the room feels about AI. People discuss their opinions of AI in groups, then with me.'},
+    {ph:'discover', p:'Discover', m:15, n:'The Maze', chk:'Did teams notice that feedback alone got them through? That sets up the idea of patterns.', f:'Floor game · 4 teams', what:'Puzzle mats on the floor become a grid with one hidden path. Teams step through one mat at a time, and I can only say “correct” or “incorrect”. Even though nobody saw the path, through trial and error they were able to find it.', ask:'“How did you find the challenge?”', x:'maze'},
+    {ph:'discover', p:'Discover', m:10, n:'Build the Bot', chk:'Do teams link their result to the information they were given?', f:'Timed challenge · 4 teams', what:'Four teams get the same magnetic tiles and three minutes to build this bot, but each team gets different information: told verbally only, the image for 30 seconds, a written prompt, or the prompt and the image. Then we compare the builds, before any prompting has been taught.', ask:'“What tools did you have? What made it easier or harder?”', slide:'Your Input = The Output. Better prompts = better answers.', x:'bot'},
+    {ph:'name', p:'Name it', m:10, n:'PRO Deck', chk:'Can teams spot the structure for themselves before it’s named?', f:'Card game · 4 teams', what:'Teams piece together the PRO sentence cards until someone spots the pattern. The first team to finish wins. Only then does the framework get its name.', ask:'“What pattern can you see? What does it spell?”', slide:'The PRO framework: Persona, Role, Output.', x:'pro'},
+    {ph:'practise', p:'Practise', m:10, n:'Prompt Builder', chk:'Volunteers read their prompts aloud while I walk the room: can people use PRO to write a prompt of their own?', f:'Worksheet · 4 teams', what:'Teams build their own prompt one letter at a time from the example options while I walk the room. Volunteers read theirs out, and one team’s prompt is used later in the live demo.', slide:'You don’t just tell AI what to do — you guide how it does it.', x:'builder'},
     {ph:'practise', p:'Practise', m:5, n:'Break', f:'Individuals', what:'Everyone writes down a business idea they’ve never pursued, and downloads ChatGPT.', ask:'“What’s a business idea you’ve always had but never pursued?”', say:'Write it down. Don’t just think it. This could be the first step to building it. We’ll discuss after the break.'},
-    {ph:'practise', p:'Practise', m:15, n:'ChatGPT onboarding', f:'Live demo · whole room', what:'How to access ChatGPT and its models and tools. Then a vague prompt against a good PRO prompt written by one of the teams, and a business idea with a volunteer.'},
-    {ph:'apply', p:'Apply', m:20, n:'Prompt & Profit', f:'Worksheet · individuals', what:'The last 20 minutes are individual. Each person works through four prompts in ChatGPT, each building on the one before, while I walk the room coaching one to one.', x:'apply'},
-    {ph:'apply', p:'Apply', m:4, w:7, q:'end', n:'Close', f:'Whole room', what:'A PRO recap, open questions, my email for follow-up, and the 21-prompt cheat sheet to take home.', ask:'“What’s one thing you learned today?”', slide:'Master AI before it masters you.'}
+    {ph:'practise', p:'Practise', m:15, n:'ChatGPT onboarding', chk:'A team’s prompt against a vague one, using their own work: can the room see the difference in the answers?', f:'Live demo · whole room', what:'How to access ChatGPT and its models and tools. Then a vague prompt against a good PRO prompt written by one of the teams, and a business idea with a volunteer.'},
+    {ph:'apply', p:'Apply', m:20, n:'Prompt & Profit', chk:'One-to-one coaching as each person works: who can apply it on their own, and who needs help?', f:'Worksheet · individuals', what:'The last 20 minutes are individual. Each person works through four prompts in ChatGPT, each building on the one before, while I walk the room coaching one to one.', x:'apply'},
+    {ph:'apply', p:'Apply', m:4, w:7, q:'end', n:'Close', chk:'What people are taking away, in their own words.', f:'Whole room', what:'A PRO recap, open questions, my email for follow-up, and the 21-prompt cheat sheet to take home.', ask:'“What’s one thing you learned today?”', slide:'Master AI before it masters you.'}
   ];
   var bar = document.getElementById('bar90'), segDetail = document.getElementById('segDetail');
   var segBtns = SEGS.map(function(s, i){
@@ -594,6 +590,7 @@ details ul b{color:var(--ink); font-weight:600;}
     if (s.ask) h += '<span class="k">Ask</span><span class="quote">' + esc(s.ask) + '</span>';
     if (s.slide) h += '<span class="k">Slide</span><span class="quote">“' + esc(s.slide) + '”</span>';
     if (s.say) h += '<span class="k">Say</span><span>' + esc(s.say) + '</span>';
+    if (s.chk) h += '<span class="k">Check</span><span class="chk">' + esc(s.chk) + '</span>';
     segDetail.innerHTML = h;
     Array.prototype.forEach.call(document.querySelectorAll('.seg-extra'), function(x){ x.hidden = x.getAttribute('data-for') !== s.x; });
     document.getElementById('segPrev').disabled = i === 0;
