@@ -356,11 +356,11 @@ details ul b{color:var(--ink); font-weight:600;}
         <!-- PRO Deck -->
         <div class="seg-extra" data-for="pro" hidden>
           <div class="pro-defs">
-            <div class="pro-def cp"><span class="L">P</span><span class="w">Persona</span><p>Who the AI should be. “You are a…”</p></div>
-            <div class="pro-def cr"><span class="L">R</span><span class="w">Role</span><p>Who the AI is helping, and their situation. “Act like you’re helping someone who is…”</p></div>
-            <div class="pro-def co"><span class="L">O</span><span class="w">Output</span><p>How the answer should be explained or set out. “Explain it…”</p></div>
+            <div class="pro-def cp"><span class="L">P</span><span class="w">Persona</span><p>Who the AI should act as. “You are a…”</p></div>
+            <div class="pro-def cr"><span class="L">R</span><span class="w">Role</span><p>The job or point of view the AI should take. “Act like…”</p></div>
+            <div class="pro-def co"><span class="L">O</span><span class="w">Output</span><p>What the AI should produce. “Explain it…”</p></div>
           </div>
-          <p class="foot" style="margin-top:10px;">Persona is about the AI; Role is about the person on the receiving end.</p>
+          <p class="foot" style="margin-top:10px;">Persona is who the AI acts as; Role is the job or point of view it takes.</p>
         </div>
 
         <!-- Prompt Builder -->
@@ -368,7 +368,7 @@ details ul b{color:var(--ink); font-weight:600;}
           <div class="subcard stack">
             <span class="sim">Try the Prompt Builder · options from the original worksheet</span>
             <div class="opt-group cp"><span class="k">P · Persona: You are a…</span><div class="opts" data-slot="p"></div></div>
-            <div class="opt-group cr"><span class="k">R · Role: Act like you’re helping someone who is…</span><div class="opts" data-slot="r"></div></div>
+            <div class="opt-group cr"><span class="k">R · Role: Act like…</span><div class="opts" data-slot="r"></div></div>
             <div class="opt-group co"><span class="k">O · Output: Explain it…</span><div class="opts" data-slot="o"></div></div>
             <p class="assembled" id="assembled" aria-live="polite"></p>
           </div>
@@ -416,7 +416,7 @@ details ul b{color:var(--ink); font-weight:600;}
           <span class="label" style="display:block; margin-bottom:14px;">From the day itself</span>
           <ul class="checklist">
             <li><span class="when">Timing</span><span>It was planned as 90 minutes and ran to two hours. I’d plan for two hours from the start, or trim the onboarding demo, so the last activity never gets squeezed.</span></li>
-            <li><span class="when">One meaning of Role</span><span>My slide called Role “what job or point of view the AI should take”, while my worksheet used “who it’s helping”. I’d use one definition everywhere: Persona is the AI, Role is the person on the receiving end.</span></li>
+            <li><span class="when">One meaning of Role</span><span>My slide defined Role as “the job or point of view the AI should take”, but my worksheet used it for “who the AI is helping”. I’d use the slide’s definition everywhere, so the worksheet and the slides say the same thing.</span></li>
             <li><span class="when">The Maze slide</span><span>“AI learns through trial and error” works as a hook. I’d follow it with the fuller picture: AI learns patterns from huge numbers of examples, then predicts what’s most likely to come next.</span></li>
             <li><span class="when">Earning ideas</span><span>I’d frame the Prompt &amp; Profit earning prompts as small experiments to test, and be realistic about the effort, rather than anything that sounds like a promise of income.</span></li>
           </ul>
@@ -580,7 +580,7 @@ details ul b{color:var(--ink); font-weight:600;}
   /* ================= 04 PRO builder ================= */
   var OPTS = {
     p:['helpful English tutor','experienced YouTube coach','patient business mentor','strict interview coach'],
-    r:['a total beginner','nervous about public speaking','trying to save money','starting a new job'],
+    r:['a friend giving honest feedback','someone reviewing content for tone','someone testing this for usability','someone ready to buy but needs clarity'],
     o:['step-by-step','in 3 bullet points','by asking 2 questions first','using examples']
   };
   var pick = {p:2, r:0, o:0};
@@ -599,7 +599,7 @@ details ul b{color:var(--ink); font-weight:600;}
       Array.prototype.forEach.call(box.children, function(b, i){ b.setAttribute('aria-pressed', i === pick[slot] ? 'true' : 'false'); });
     });
     var a = /^[aeiou]/i.test(OPTS.p[pick.p]) ? 'an' : 'a';
-    assembled.innerHTML = '“You are ' + a + ' <span class="cp">' + OPTS.p[pick.p] + '</span>. Act like you’re helping someone who is <span class="cr">' +
+    assembled.innerHTML = '“You are ' + a + ' <span class="cp">' + OPTS.p[pick.p] + '</span>. Act like <span class="cr">' +
       OPTS.r[pick.r] + '</span>. Explain it <span class="co">' + OPTS.o[pick.o] + '</span>.”';
   }
   renderPro();
